@@ -15,15 +15,15 @@ ActiveRecord::Schema.define(version: 20151223063040) do
 
   create_table "races", force: :cascade do |t|
     t.date     "date"
-    t.string   "place"
-    t.string   "race_num"
-    t.integer  "ranking"
-    t.integer  "frame_num"
-    t.integer  "horce_num"
-    t.integer  "popularity"
-    t.float    "odds"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "place",      limit: 255
+    t.string   "race_num",   limit: 255
+    t.integer  "ranking",    limit: 4
+    t.integer  "frame_num",  limit: 4
+    t.integer  "horce_num",  limit: 4
+    t.integer  "popularity", limit: 4
+    t.float    "odds",       limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
