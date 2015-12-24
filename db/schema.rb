@@ -11,19 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223063040) do
+ActiveRecord::Schema.define(version: 20151224150332) do
+
+  create_table "places", force: :cascade do |t|
+    t.integer  "place_id",   limit: 4
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "races", force: :cascade do |t|
     t.date     "date"
-    t.string   "place",      limit: 255
     t.string   "race_num",   limit: 255
-    t.integer  "ranking",    limit: 4
-    t.integer  "frame_num",  limit: 4
-    t.integer  "horce_num",  limit: 4
-    t.integer  "popularity", limit: 4
-    t.float    "odds",       limit: 24
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "place_id",   limit: 4
   end
 
 end
