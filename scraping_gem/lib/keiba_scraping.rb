@@ -28,6 +28,7 @@ module KeibaScraping
       "枠番",
       "馬番",
       "人気順",
+      "馬名",
       "オッズ",
     ]
   end
