@@ -1,3 +1,3 @@
 class Race < ActiveRecord::Base
-  belongs_to :race
+  belongs_to :place
 end
