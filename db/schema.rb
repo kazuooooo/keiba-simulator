@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151226080414) do
+ActiveRecord::Schema.define(version: 20151226082318) do
+
+  create_table "horceresults", force: :cascade do |t|
+    t.integer  "race_id",    limit: 4
+    t.integer  "horce_id",   limit: 4
+    t.float    "odds",       limit: 24
+    t.integer  "popularity", limit: 4
+    t.integer  "horce_num",  limit: 4
+    t.integer  "frame_num",  limit: 4
+    t.integer  "ranking",    limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "horces", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "horce_id",   limit: 4
+  end
 
   create_table "places", force: :cascade do |t|
     t.integer  "place_id",   limit: 4
