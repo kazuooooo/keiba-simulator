@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe Place, type: :model do
   before do
     @place = Place.create(name: "東京")
-    @race1 = @place.races.build(date: '2001-12-01', race_num: '1')
+    @race1 = @place.races.build(date: '2001-12-01', race_num: 1)
     @race1.save
     # binding.pry
   end
 
   describe "create" do
     it "1つできている" do
-      expect(@place.races[0].race_num).to eq "1"
+      expect(@place.races[0].race_num).to eq 1
     end
   end
 

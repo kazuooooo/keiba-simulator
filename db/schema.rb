@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224150332) do
+ActiveRecord::Schema.define(version: 20151226080414) do
 
   create_table "places", force: :cascade do |t|
     t.integer  "place_id",   limit: 4
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20151224150332) do
 
   create_table "races", force: :cascade do |t|
     t.date     "date"
-    t.string   "race_num",   limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "race_num",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "place_id",   limit: 4
   end
 
