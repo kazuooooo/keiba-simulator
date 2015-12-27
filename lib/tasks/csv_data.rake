@@ -23,39 +23,54 @@ namespace :csv_data do
     Horceresult.delete_all
     Horce.delete_all
     Place.delete_all
-    places =[]
-    # Placeのモデルを作っておく
+    # Placeを作成しておく
     place_hash.each do |place|
-      places << Place.create!(
-                  :name => place[0],
-                  :place_id => place[1]
-                )
+      Place.create!(
+        :name => place[0]
+      )
     end
-    # ファイルを読み込み
+
+    # csv処理
+    prior_row = nil
+    race = nil
+    ## ファイルを読み込み
     csv_text = File.read('csv_data/test.csv')
-    # tableオブジェクトに変換
+    ## tableオブジェクトに変換
     CSV.parse(csv_text, :headers => :first_row) do |row|
-      # Placeを使ってRaceをビルド
-      ## 日付をDateDateオブジェクトに変換
+      ### Placeを使ってRaceをビルド
+      place = Place.find_by(:name => row['場所'])
+      ### 日付をDateオブジェクトに変換
       date_str = row['日付'].slice(/2.*日/)
       date_obj = Date.strptime(date_str,"%Y年 %m月 %d日")
-      Race.create!(:date => date_obj, :race_num => row['R'], :place_id => place_hash[row['場所']])
+      ### raceモデルを作成
+      if (prior_row.nil?) || (row['R'] != prior_row['R'])
+        race = place.races.build(:date => date_obj, :race_num => row['R'])
+        place.save
+      end
 
-      # Raceを使ってhorce_resultをビルド
-      # HorceResultsModel
-      # Horceresult.create!(
-      #   :odds => row['オッズ'],
-      #   :popularity => row['人気順'],
-      #   :horce_num => row['馬番'],
-      #   :frame_num => row['枠番'],
-      #   :ranking => row['着順']
-      #   )
+      ### horceresultモデルを作成
+      race.horceresults.build(
+        :odds => row['オッズ'],
+        :popularity => row['人気順'],
+        :horce_num => row['馬番'],
+        :frame_num => row['枠番'],
+        :ranking => row['着順']
+      )
+      race.save
 
-      # # Horce
-      # Horce.create!(
-      #   :name => row['馬名']
-      # )
+      ### DBになければHorceモデルを作成
+      if Horce.find_by(:name => row['馬名']).nil?
+        Horce.create!(:name => row['馬名'])
+      end
+
+      ### 1つ前の行を保存
+      prior_row = row
     end
+  end
+
+  # 場所名からplaceオブジェクトを取得
+  def get_place(name)
+    Race.find_by(:name)
   end
 end
   # create_table "places", force: :cascade do |t|
