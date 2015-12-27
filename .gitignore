@@ -36,3 +36,4 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+csv_data/
