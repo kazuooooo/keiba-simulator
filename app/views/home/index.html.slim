@@ -1,5 +1,48 @@
-h1 Markup examples
+= simple_form_for :result, { url: result_path } do |f|
+  = f.input :year,
+    as: :select,
+    required: true,
+    collection: [["2010", 2010],
+                 ["2011", 2011],
+                 ["2012", 2012],
+                 ["2013", 2013],
+                 ["2014", 2014]]
+  = f.input :place,
+    as: :select,
+    required: true,
+    collection: [["東京", "東京"],
+                 ["阪神", "阪神"],
+                 ["函館", "函館"],
+                 ["札幌", "札幌"],
+                 ["中山", "中山"]]
+  = f.input :popularity,
+    as: :select,
+    required: true,
+    collection: [["1", 1],
+                 ["2", 2],
+                 ["3", 3],
+                 ["4", 4],
+                 ["5", 5],
+                 ["6", 6],
+                 ["7", 7],
+                 ["8", 8],
+                 ["9", 9],
+                 ["10", 10],
+                 ["11", 11],
+                 ["12", 12],
+                 ["13", 13],
+                 ["14", 14],
+                 ["15", 15],
+                 ["16", 16],
+                 ["17", 17],
+                 ["18", 18],]
+  = f.input :border
+  = f.submit :submit
+  / = f.input :type
 
-#content
-  p This example shows you how a basic Slim file looks.
-
+    / - 年 プルダウン(2010-2015)
+    / - 競馬場 プルダウン(東京、阪神、、、、)
+    / - 何番人気(とりあえず１つずつ計算できるようにする) プルダウン
+    / - 境界値((ただし自動的に0.1刻みとかで計算させて最適値を出す) テキストフィールド
+    / - 賭け方(とりあえず単勝のみ)
+    / - など

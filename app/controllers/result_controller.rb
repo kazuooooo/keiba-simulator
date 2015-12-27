@@ -1,5 +1,5 @@
 class ResultController < ApplicationController
   def result
-    @races = Race.all
+    @result = params[:result][:year]
   end
 end
