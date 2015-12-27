@@ -18,8 +18,9 @@ module KeibaScraping
   class Race < Struct.new(:date, :place, :race_num); end
   # horce 着順、枠番、馬番、人気、オッズ
   class Horce < Struct.new(:ranking, :frame_num, :horce_num, :horce_name, :popularity, :odds); end
+  csv_file = "sample.csv"
   # CSVヘッダー記載
-  CSV.open("test.csv","w") do |csv|
+  CSV.open(csv_file,"w") do |csv|
     csv << [
       "日付",
       "場所",
@@ -27,8 +28,8 @@ module KeibaScraping
       "着順",
       "枠番",
       "馬番",
-      "人気順",
       "馬名",
+      "人気順",
       "オッズ",
     ]
   end
@@ -95,7 +96,7 @@ module KeibaScraping
                 @horce_objs << horce_obj
               end
 
-              CSV.open("test.csv","a") do |csv|
+              CSV.open(csv_file,"a") do |csv|
                 @horce_objs.each do |horce_obj|
                   csv << [
                           race_obj.date,

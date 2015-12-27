@@ -29,12 +29,11 @@ namespace :csv_data do
         :name => place[0]
       )
     end
-
     # csv処理
     prior_row = nil
     race = nil
     ## ファイルを読み込み
-    csv_text = File.read('csv_data/test.csv')
+    csv_text = File.read('csv_data/sample.csv')
     ## tableオブジェクトに変換
     CSV.parse(csv_text, :headers => :first_row) do |row|
       ### Placeを使ってRaceをビルド
@@ -66,11 +65,6 @@ namespace :csv_data do
       ### 1つ前の行を保存
       prior_row = row
     end
-  end
-
-  # 場所名からplaceオブジェクトを取得
-  def get_place(name)
-    Race.find_by(:name)
   end
 end
   # create_table "places", force: :cascade do |t|
