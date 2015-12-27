@@ -1,10 +1,10 @@
 class ResultController < ApplicationController
   def result
-    # year = params[:result][:year]
-    # place = params[:result][:place]
-    # popularity = params[:result][:popularity]
-    # border = params[:border][:border]
-    result = calc_result(2011,"札幌",1,3)
+    year = params[:result][:year].to_i
+    place = params[:result][:place]
+    popularity = params[:result][:popularity].to_i
+    border = params[:result][:border].to_f
+    @result = calc_result(year, place, popularity, border)
   end
 
   def calc_result(year, place, popularity, border)
@@ -12,6 +12,7 @@ class ResultController < ApplicationController
     result = 0
     horce_results = []
 
+    # TODO: 年で絞る
     # yearとplaceで絞ってHorceRaceResultを取得(yearは保留)
     place_id = Place.find_by(:name => place)
     races = Race.where('place_id = ?', place_id)
@@ -22,7 +23,6 @@ class ResultController < ApplicationController
         horce_results << result if (result.popularity == popularity)
       end
     end
-
     # 各HorceResultに対して
     horce_results.each do |horce_result|
       ## オッズがborderより上じゃない場合は買わないので飛ばす
@@ -33,6 +33,6 @@ class ResultController < ApplicationController
         result += 100*horce_result.odds if horce_result.ranking == 1
       end
     end
-    puts "result"<<result.to_s
+    result
   end
 end
