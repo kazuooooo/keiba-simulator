@@ -35,6 +35,8 @@ gem 'execjs'
 gem 'pry'
 gem 'slim'
 gem 'simple_form'
+# for making graph
+gem "chartkick"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
