@@ -1,10 +1,27 @@
+# FIXME: 本来ここから読むべきではないはず
+require_relative '../util/numeric.rb'
 class ResultController < ApplicationController
   def result
-    year = params[:result][:year].to_i
-    place = params[:result][:place]
-    popularity = params[:result][:popularity].to_i
-    border = params[:result][:border].to_f
-    @result = calc_result(year, place, popularity, border)
+    # postされてきた値を取得
+    # year = params[:result][:year].to_i
+    # place = params[:result][:place]
+    # popularity = params[:result][:popularity].to_i
+    # border_start = params[:result][:border_start].to_f
+    # border_end = params[:result][:border_end]
+    # 結果を格納
+    @results = calc_results(2015, "札幌", 1, 1.0, 3.5)
+  end
+
+  def calc_results(year, place, popularity, border_start, border_end)
+    results_hash = {}
+    #results_array << calc_result(2015, "札幌", 1, 0)
+    border = border_start
+    while border <= border_end do
+      result = calc_result(2015, "札幌", 1, border)
+      results_hash[border] = result
+      border = (border+0.1).rounddown(1)
+    end
+    results_hash
   end
 
   def calc_result(year, place, popularity, border)

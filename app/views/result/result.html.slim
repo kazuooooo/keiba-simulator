@@ -1,9 +1,8 @@
-h1 this is result!!!
-= @result
-/ p
-/   - @races.each do |race|
-/     |  日時
-/     = race.date
-/     | 場所
-/     = race.place
-/     br
+table border="3"
+  tr
+    th 境界値
+    th 結果
+  - @results.each do |result|
+    tr
+      td= result[0]
+      td= result[1]
