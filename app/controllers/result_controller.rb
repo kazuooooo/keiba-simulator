@@ -10,6 +10,20 @@ class ResultController < ApplicationController
     # border_end = params[:result][:border_end]
     # 結果を格納
     @results = calc_results(2015, "札幌", 1, 1.0, 3.5)
+
+    border_array = []
+    result_array = []
+
+    @results.each do |result|
+      border_array << result[0]
+      result_array << result[1]
+    end
+
+    @graph = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title(text: '結果') # f.title(text: "#{year}年 #{place}競馬場 #{popularity}人気 オッズ#{border_start}〜#{border_end}")
+      f.xAxis(categories: border_array)
+      f.series(name: '結果(円)', data: result_array)
+    end
   end
 
   def calc_results(year, place, popularity, border_start, border_end)
@@ -35,9 +49,9 @@ class ResultController < ApplicationController
     races = Race.where('place_id = ?', place_id)
 
     races.each do |race|
-      race.horceresults.each do |result|
+      race.horceresults.each do |horce_result|
         # HorceResultからpolularityで絞って取得
-        horce_results << result if (result.popularity == popularity)
+        horce_results << horce_result if (horce_result.popularity == popularity)
       end
     end
     # 各HorceResultに対して
