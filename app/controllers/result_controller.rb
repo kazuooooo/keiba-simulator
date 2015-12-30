@@ -3,13 +3,15 @@ require_relative '../util/numeric.rb'
 class ResultController < ApplicationController
   def result
     # postされてきた値を取得
-    # year = params[:result][:year].to_i
-    # place = params[:result][:place]
-    # popularity = params[:result][:popularity].to_i
-    # border_start = params[:result][:border_start].to_f
-    # border_end = params[:result][:border_end]
+    year = params[:result][:year].to_i
+    place = params[:result][:place]
+    popularity = params[:result][:popularity].to_i
+    border_start = params[:result][:border_start].to_f
+    border_end = params[:result][:border_end].to_f
+    # binding.pry
     # 結果を格納
-    @results = calc_results(2015, "札幌", 1, 1.0, 3.5)
+    @results = calc_results(year, place, popularity, border_start, border_end)
+    # @results = calc_results(2015, "札幌", 2, 5.0, 7.0)
 
     border_array = []
     result_array = []
@@ -31,9 +33,9 @@ class ResultController < ApplicationController
     #results_array << calc_result(2015, "札幌", 1, 0)
     border = border_start
     while border <= border_end do
-      result = calc_result(2015, "札幌", 1, border)
-      results_hash[border] = result
-      border = (border+0.1).rounddown(1)
+      result = calc_result(year, place, popularity, border)
+      results_hash[border.rounddown(1)] = result
+      border = border + 0.1
     end
     results_hash
   end
