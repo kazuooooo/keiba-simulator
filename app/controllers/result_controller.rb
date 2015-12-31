@@ -50,7 +50,7 @@ class ResultController < ApplicationController
         ### 馬券を買うので100円引く
         result -= 100
         ### 着順が1位の場合オッズ✖︎100円を合計にたす
-        result += 100*horce_result.odds if horce_result.ranking == 1
+        result += 100 * horce_result.odds if horce_result.ranking == 1
       end
     end
     result
@@ -66,7 +66,10 @@ class ResultController < ApplicationController
     end
 
     @graph = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(text: "#{@year}年 #{@place}競馬場 #{@popularity}番人気 ボーダーオッズ#{@border_start}〜#{@border_end}")
+      f.title(text: "#{@year}年 #{@place}競馬場
+                     #{@popularity}番人気
+                     ボーダーオッズ#{@border_start}〜#{@border_end}"
+              )
       f.xAxis(categories: border_array)
       f.series(name: '結果(円)', data: result_array)
     end
