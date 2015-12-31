@@ -1,16 +1,8 @@
 = simple_form_for :result, { url: result_path } do |f|
-  = f.input :year,
-    as: :select,
-    required: true,
-    collection: [["2010", 2010],
-                 ["2011", 2011],
-                 ["2012", 2012],
-                 ["2013", 2013],
-                 ["2014", 2014],
-                 ["2015", 2015]]
+  = f.input :date_from, as: :date
+  = f.input :date_to, as: :date
   = f.input :place,
     as: :select,
-    required: true,
     collection: [["東京", "東京"],
                  ["阪神", "阪神"],
                  ["函館", "函館"],
@@ -37,8 +29,8 @@
                  ["16", 16],
                  ["17", 17],
                  ["18", 18],]
-  = f.input :border_start
-  = f.input :border_end
-  = f.submit :submit
+  = f.input :border_start, as: :float
+  = f.input :border_end, as: :float
+  = f.button :submit, "Calc"
 
 
