@@ -3,14 +3,23 @@ require_relative '../util/numeric.rb'
 class ResultController < ApplicationController
   def result
     # postされてきた値を取得
-    @year = params[:result][:year].to_i
+
+    @date_from = Date.new(
+      params['result']['date_from(1i)'].to_i,
+      params['result']['date_from(2i)'].to_i,
+      params['result']['date_from(3i)'].to_i
+      )
+    @date_to = Date.new(
+      params['result']['date_to(1i)'].to_i,
+      params['result']['date_to(2i)'].to_i,
+      params['result']['date_to(3i)'].to_i
+      )
     @place = params[:result][:place]
     @popularity = params[:result][:popularity].to_i
     @border_start = params[:result][:border_start].to_f
     @border_end = params[:result][:border_end].to_f
-
     # 計算結果を格納
-    results = calc_results(@year, @place, @popularity, @border_start, @border_end)
+    results = calc_results(@date_from, @date_to, @place, @popularity, @border_start, @border_end)
     # 結果をグラフに描画
     draw_graph(results)
   end
@@ -66,7 +75,7 @@ class ResultController < ApplicationController
     end
 
     @graph = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(text: "#{@year}年 #{@place}競馬場
+      f.title(text: "#{@date_from}年 #{@place}競馬場
                      #{@popularity}番人気
                      ボーダーオッズ#{@border_start}〜#{@border_end}"
               )
