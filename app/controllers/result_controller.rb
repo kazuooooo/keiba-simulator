@@ -22,7 +22,7 @@ class ResultController < ApplicationController
     end
 
     @graph = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(text: '結果') # f.title(text: "#{year}年 #{place}競馬場 #{popularity}人気 オッズ#{border_start}〜#{border_end}")
+      f.title(text: "#{year}年 #{place}競馬場 #{popularity}番人気 ボーダーオッズ#{border_start}〜#{border_end}")
       f.xAxis(categories: border_array)
       f.series(name: '結果(円)', data: result_array)
     end

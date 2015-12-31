@@ -33,7 +33,7 @@ namespace :csv_data do
     prior_row = nil
     race = nil
     ## ファイルを読み込み
-    csv_text = File.read('csv_data/sample_mini.csv')
+    csv_text = File.read('csv_data/sample_middle.csv')
     ## tableオブジェクトに変換
     CSV.parse(csv_text, :headers => :first_row) do |row|
       ### Placeを使ってRaceをビルド
