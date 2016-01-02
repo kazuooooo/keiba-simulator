@@ -25,22 +25,28 @@ class ResultController < ApplicationController
 
   # border_startからborder_endまで0.1刻みで計算
   def calc_results(date_from, date_to, place, popularity, border_start, border_end)
+    horce_results = get_target_horce_results(date_from, date_to, place, popularity)
     results_hash = {}
     border = border_start
     while border <= border_end do
-      result = calc_result(date_from, date_to, place, popularity, border)
+      result = simulate_races(horce_results, border)
       results_hash[border.rounddown(1)] = result
       border = border + 0.1
     end
     results_hash
   end
 
-  def calc_result(date_from, date_to, place, popularity, border)
-    ### get target horceresult ※ テスト駆動
-    horce_results = get_target_horce_result(date_from, date_to, place, popularity)
-    ###
+  # 検索条件に合うhorce_resultを取得
+  def get_target_horce_results(date_from, date_to, place, popularity)
+    races = Race.where(date: date_from..date_to, place_id:Place.find_by(name: place))
+    horceresults = races.map do |race|
+                     race.horceresults.where(popularity: popularity)
+                   end
+    horceresults.flatten
+  end
 
-    ### simulate races
+  # シミュレートして結果を返す
+  def simulate_races(horce_results, border)
     result = 0
     # 各HorceResultに対して
     horce_results.each do |horce_result|
@@ -52,17 +58,7 @@ class ResultController < ApplicationController
         result += 100 * horce_result.odds if horce_result.ranking == 1
       end
     end
-    ###
     result
-  end
-
-  # 検索条件に合うhorce_resultを取得
-  def get_target_horce_result(date_from, date_to, place, popularity)
-    races = Race.where(date: date_from..date_to, place_id:Place.find_by(name: place))
-    horceresults = races.map do |race|
-                     race.horceresults.where(popularity: popularity)
-                   end
-    horceresults.flatten
   end
 
   # グラフを描画
