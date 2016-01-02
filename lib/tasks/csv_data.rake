@@ -3,10 +3,11 @@ require 'date'
 
 namespace :csv_data do
   desc "import csv data to DB"
-  task :import => :environment do
+  task :import, 'file_name'
+  task :import => :environment do |task, args|
     clear_data()
     create_place_table()
-    import_csv_data()
+    import_csv_data(args['file_name'])
   end
 end
 
@@ -40,13 +41,13 @@ def create_place_table
 
 end
 
-def import_csv_data()
+def import_csv_data(file_name)
 
   prior_row = nil
   race = nil
 
   ## ファイルを読み込み
-  csv_text = File.read('csv_data/sample_mini.csv')
+  csv_text = File.read('csv_data/' << file_name << '.csv')
 
   ## tableオブジェクトに変換してtableデータを作成
   CSV.parse(csv_text, :headers => :first_row) do |row|
