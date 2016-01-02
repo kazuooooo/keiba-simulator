@@ -27,11 +27,12 @@ class ResultController < ApplicationController
   def calc_results(date_from, date_to, place, popularity, border_start, border_end)
     horce_results = get_target_horce_results(date_from, date_to, place, popularity)
     results_hash = {}
+    interval_val = (border_end - border_start) / 10
     border = border_start
     while border <= border_end do
       result = simulate_races(horce_results, border)
       results_hash[border.rounddown(1)] = result
-      border = border + 0.1
+      border = border + interval_val
     end
     results_hash
   end
