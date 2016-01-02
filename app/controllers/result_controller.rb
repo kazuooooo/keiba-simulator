@@ -2,8 +2,7 @@
 require_relative '../util/numeric.rb'
 class ResultController < ApplicationController
   def result
-    # postされてきた値を取得
-
+    # postされてきた値を取得(さすがにconditionのstructでまとめた方が良いと思う)
     @date_from = Date.new(
       params['result']['date_from(1i)'].to_i,
       params['result']['date_from(2i)'].to_i,
@@ -25,33 +24,24 @@ class ResultController < ApplicationController
   end
 
   # border_startからborder_endまで0.1刻みで計算
-  def calc_results(year, place, popularity, border_start, border_end)
+  def calc_results(date_from, date_to, place, popularity, border_start, border_end)
     results_hash = {}
     border = border_start
     while border <= border_end do
-      result = calc_result(year, place, popularity, border)
+      result = calc_result(date_from, date_to, place, popularity, border)
       results_hash[border.rounddown(1)] = result
       border = border + 0.1
     end
     results_hash
   end
 
-  def calc_result(year, place, popularity, border)
-    # UGLYHACK: 本来的には一つのSQLでできるはず
+  def calc_result(date_from, date_to, place, popularity, border)
+    ### get target horceresult ※ テスト駆動
+    horce_results = get_target_horce_result(date_from, date_to, place, popularity)
+    ###
+
+    ### simulate races
     result = 0
-    horce_results = []
-
-    # TODO: 年で絞る
-    # yearとplaceで絞ってHorceRaceResultを取得(yearは保留)
-    place_id = Place.find_by(:name => place)
-    races = Race.where('place_id = ?', place_id)
-
-    races.each do |race|
-      race.horceresults.each do |horce_result|
-        # HorceResultからpolularityで絞って取得
-        horce_results << horce_result if (horce_result.popularity == popularity)
-      end
-    end
     # 各HorceResultに対して
     horce_results.each do |horce_result|
       ## オッズがborderより上じゃない場合は買わないので飛ばす
@@ -62,9 +52,20 @@ class ResultController < ApplicationController
         result += 100 * horce_result.odds if horce_result.ranking == 1
       end
     end
+    ###
     result
   end
 
+  # 検索条件に合うhorce_resultを取得
+  def get_target_horce_result(date_from, date_to, place, popularity)
+    races = Race.where(date: date_from..date_to, place_id:Place.find_by(name: place))
+    horceresults = races.map do |race|
+                     race.horceresults.where(popularity: popularity)
+                   end
+    horceresults.flatten
+  end
+
+  # グラフを描画
   def draw_graph(results)
     border_array = []
     result_array = []
@@ -75,7 +76,7 @@ class ResultController < ApplicationController
     end
 
     @graph = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(text: "#{@date_from}年 #{@place}競馬場
+      f.title(text: "#{@date_from} - #{@date_to} #{@place}競馬場
                      #{@popularity}番人気
                      ボーダーオッズ#{@border_start}〜#{@border_end}"
               )
