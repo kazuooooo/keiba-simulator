@@ -1,1 +1,2 @@
-= high_chart("sample", @graph)
+- @graphs.each_with_index do |graph, count|
+  = high_chart("pop" << count.to_s, graph)

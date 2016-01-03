@@ -1,6 +1,7 @@
 # FIXME: 本来ここから読むべきではないはず
 require_relative '../util/numeric.rb'
 class ResultController < ApplicationController
+  PopularityCondition = Struct.new(:popularity, :border_start, :border_end)
   def result
     # postされてきた値を取得(さすがにconditionのstructでまとめた方が良いと思う)
     @date_from = Date.new(
@@ -14,13 +15,31 @@ class ResultController < ApplicationController
       params['result']['date_to(3i)'].to_i
       )
     @place = params[:result][:place]
-    @popularity = params[:result][:popularity].to_i
-    @border_start = params[:result][:border_start].to_f
-    @border_end = params[:result][:border_end].to_f
+
+    # 人気順をあるだけ取得
+    @pop_cons = []
+    for num in 1..18 do
+      unless params['result']['popularity' << num.to_s].nil? then
+        @pop_cons << PopularityCondition.new(
+                      params['result']['popularity' << num.to_s].to_i,
+                      params['result']['border_start' << num.to_s].to_f,
+                      params['result']['border_end' << num.to_s].to_f
+                     )
+      end
+    end
     # 計算結果を格納
-    results = calc_results(@date_from, @date_to, @place, @popularity, @border_start, @border_end)
+    pop_results = @pop_cons.map do |pop_con|
+                    calc_results(@date_from,
+                                 @date_to,
+                                 @place,
+                                 pop_con.popularity,
+                                 pop_con.border_start,
+                                 pop_con.border_end)
+                  end
+    # pop_conをkey, pop_resultをvalueにしたハッシュ
+    con_results_hash = Hash[@pop_cons.zip(pop_results)]
     # 結果をグラフに描画
-    draw_graph(results)
+    draw_graphs(con_results_hash)
   end
 
   # border_startからborder_endまで0.1刻みで計算
@@ -63,22 +82,23 @@ class ResultController < ApplicationController
   end
 
   # グラフを描画
-  def draw_graph(results)
-    border_array = []
-    result_array = []
+  def draw_graphs(con_results_hash)
+    @graphs = []
+    con_results_hash.each do |con, results|
+      border_array = []
+      result_array = []
+      results.each do |result|
+        border_array << result[0]
+        result_array << result[1]
+      end
 
-    results.each do |result|
-      border_array << result[0]
-      result_array << result[1]
-    end
-
-    @graph = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(text: "#{@date_from} - #{@date_to} #{@place}競馬場
-                     #{@popularity}番人気
-                     ボーダーオッズ#{@border_start}〜#{@border_end}"
-              )
-      f.xAxis(categories: border_array)
-      f.series(name: '結果(円)', data: result_array)
+      @graphs << LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "#{@date_from} - #{@date_to} #{@place}競馬場
+                       #{con.popularity}番人気
+                       ボーダーオッズ#{con.border_start}〜#{con.border_end}")
+        f.xAxis(categories: border_array)
+        f.series(name: '結果(円)', data: result_array)
+      end
     end
   end
 end
