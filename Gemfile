@@ -53,5 +53,6 @@ group :development do
   gem 'spring'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'pry-byebug'
 end
 
