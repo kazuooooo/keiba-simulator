@@ -15,6 +15,7 @@ class ResultController < ApplicationController
       params['result']['date_to(3i)'].to_i
       )
     @place = params[:result][:place]
+    @border_down = params[:result][:border_down]
 
     # 人気順をあるだけ取得
     @pop_cons = []
@@ -71,7 +72,8 @@ class ResultController < ApplicationController
     # 各HorceResultに対して
     horce_results.each do |horce_result|
       ## オッズがborderより上じゃない場合は買わないので飛ばす
-      if horce_result.odds > border
+      # if horce_result.odds > border
+      if border_judge(horce_result.odds, border)
         ### 馬券を買うので100円引く
         result -= 100
         ### 着順が1位の場合オッズ✖︎100円を合計にたす
@@ -79,6 +81,16 @@ class ResultController < ApplicationController
       end
     end
     result
+  end
+
+  def border_judge(odds, border)
+    if @border_down.to_i.zero?
+      puts 'border up'
+      odds > border
+    else
+      puts 'border down'
+      odds < border
+    end
   end
 
   # グラフを描画

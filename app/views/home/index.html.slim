@@ -8,7 +8,10 @@
                  ["函館", "函館"],
                  ["札幌", "札幌"],
                  ["中山", "中山"]]
-  - for num in 1..3 do
+  p border down?
+  = f.input_field :border_down, as: :boolean
+  br
+  - for num in 1..1 do
     = f.input_field 'calc_flg' << num.to_s, as: :boolean
     = f.input 'popularity' << num.to_s,
       as: :select,
