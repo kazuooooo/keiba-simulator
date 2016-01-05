@@ -85,11 +85,9 @@ class ResultController < ApplicationController
 
   def border_judge(odds, border)
     if @border_down.to_i.zero?
-      puts 'border up'
-      odds > border
+      odds >= border
     else
-      puts 'border down'
-      odds < border
+      odds <= border
     end
   end
 
