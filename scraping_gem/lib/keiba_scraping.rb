@@ -18,7 +18,7 @@ module KeibaScraping
   class Race < Struct.new(:date, :place, :race_num); end
   # horce 着順、枠番、馬番、人気、オッズ
   class Horce < Struct.new(:ranking, :frame_num, :horce_num, :horce_name, :popularity, :odds); end
-  csv_file = "sample.csv"
+  csv_file = "2015.csv"
   # CSVヘッダー記載
   CSV.open(csv_file,"w") do |csv|
     csv << [
@@ -35,7 +35,7 @@ module KeibaScraping
   end
 
   (1..10).to_a.each do |place_num|
-    VCR.use_cassette("keiba_scraping", :record => :new_episodes) do
+    VCR.use_cassette("2015", :record => :new_episodes) do
       # 東京 12月の結果ページ(後々もっと広げる)
       p "start place" << place_num.to_s
       url = "http://keiba.yahoo.co.jp/schedule/list/2015/?place=" << place_num.to_s
