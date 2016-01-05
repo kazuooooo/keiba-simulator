@@ -42,6 +42,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rails-erd'
+  gem 'bullet'
 end
 
 group :development do
@@ -53,5 +54,9 @@ group :development do
   gem 'spring'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'pry-byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'hirb-unicode'
 end
 

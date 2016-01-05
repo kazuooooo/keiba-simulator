@@ -20,7 +20,6 @@ RSpec.describe ResultController, type: :controller do
 
     describe "正しいデータを取得している" do
       it "場所が正しい" do
-        # binding.pry
         expect(@horceresults.sample.race.place.name).to eq(@place)
       end
 
