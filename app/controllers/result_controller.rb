@@ -59,6 +59,10 @@ class ResultController < ApplicationController
 
   # 検索条件に合うhorce_resultを取得
   def get_target_horce_results(date_from, date_to, place, popularity)
+    # まだまとめれる これでもまだ多分SQLが大量発行される
+    # horceresults = Horceresults.where(popularity: popularity).map do |horce_result|
+    #                   horce_result.race.where(date: date_from..date_to, place_id:Place.find_by(name: place))
+    #                end
     races = Race.where(date: date_from..date_to, place_id:Place.find_by(name: place))
     horceresults = races.map do |race|
                      race.horceresults.where(popularity: popularity)
