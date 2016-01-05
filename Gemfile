@@ -54,5 +54,8 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'pry-byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'hirb-unicode'
 end
 
