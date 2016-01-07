@@ -1,15 +1,9 @@
   // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-[class^="result_popularity"],
-[class*="_result_popularity"] {
+[class*="_border_start"] {
   display: inline-block;
 }
-[class^="result_border_start"],
-[class*="_result_border_start"] {
-  display: inline-block;
-}
-[class^="result_border_end"],
-[class*="_result_border_end"] {
+[class*="_border_end"] {
   display: inline-block;
 }
