@@ -2,12 +2,12 @@
 require_relative '../util/numeric.rb'
 class ResultController < ApplicationController
   PopularityCondition = Struct.new(:popularity, :border_start, :border_end)
-  def result
+  def analyze_result
     # postされてきた値をセット
-    set_post_value('result')
+    set_post_value('analyze_result')
     # 各人気順を計算
     pops_calc_results = @pops_cons.map do |pop_con|
-                          calc_results(@date_from,
+                          calc_range(@date_from,
                                        @date_to,
                                        @place,
                                        pop_con.popularity,
@@ -22,16 +22,14 @@ class ResultController < ApplicationController
 
   def try_result
     set_post_value('try_result')
-    binding.pry
     # 値が入ってこなかった場合は計算しない(順番がずれないように注意)
     pops_calc_results = @pops_cons.map do |pop_con|
                           horce_results = get_target_horce_results(@date_from,
                                                                    @date_to,
                                                                    @place,
                                                                    pop_con.popularity)
-                          simulate_races(horce_results, pop_con.border_start)
+                          calc(horce_results, pop_con.border_start)
                         end
-    binding.pry
   end
 
   def set_post_value(action)
@@ -64,13 +62,13 @@ class ResultController < ApplicationController
   end
 
   # 単体で計算できるように分けたほうがいい
-  def calc_results(date_from, date_to, place, popularity, border_start, border_end)
+  def calc_range(date_from, date_to, place, popularity, border_start, border_end)
     horce_results = get_target_horce_results(date_from, date_to, place, popularity)
     results_hash = {}
     interval_val = (border_end - border_start) / 10
     border = border_start
     while border <= border_end do
-      result = simulate_races(horce_results, border)
+      result = calc(horce_results, border)
       results_hash[border.rounddown(1)] = result
       border = border + interval_val
     end
@@ -90,8 +88,8 @@ class ResultController < ApplicationController
     horceresults.flatten
   end
 
-  # シミュレートして結果を返す
-  def simulate_races(horce_results, border)
+  # 計算して結果を返す
+  def calc(horce_results, border)
     result = 0
     # 各HorceResultに対して
     horce_results.each do |horce_result|
