@@ -52,13 +52,14 @@ class ResultController < ApplicationController
     for num in 1..18 do
       unless params[action]['border_start' << num.to_s].nil? then
         @pops_cons << PopularityCondition.new(
-                      # 範囲計算の方要修正
-                      num.to_s,
-                      params[action]['border_start' << num.to_s].to_f,
-                      params[action]['border_end' << num.to_s].to_f
+                       num.to_s,
+                       params[action]['border_start' << num.to_s].to_f,
+                       params[action]['border_end' << num.to_s].to_f
                      )
       end
     end
+    # 未入力のものは削除
+    @pops_cons.reject!{|p| p.border_start == 0.0 && p.border_end == 0.0}
   end
 
   # 単体で計算できるように分けたほうがいい

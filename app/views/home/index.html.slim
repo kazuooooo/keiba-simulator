@@ -11,28 +11,7 @@
   p border down?
   = f.input_field :border_down, as: :boolean
   br
-  - for num in 1..1 do
-    = f.input 'popularity' << num.to_s,
-      as: :select,
-      required: true,
-      collection: [["1", 1],
-                   ["2", 2],
-                   ["3", 3],
-                   ["4", 4],
-                   ["5", 5],
-                   ["6", 6],
-                   ["7", 7],
-                   ["8", 8],
-                   ["9", 9],
-                   ["10", 10],
-                   ["11", 11],
-                   ["12", 12],
-                   ["13", 13],
-                   ["14", 14],
-                   ["15", 15],
-                   ["16", 16],
-                   ["17", 17],
-                   ["18", 18],]
+  - for num in 1..5 do
     = f.input 'border_start' << num.to_s, as: :float
     = f.input 'border_end' << num.to_s, as: :float
     br
