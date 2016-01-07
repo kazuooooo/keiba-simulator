@@ -1,0 +1,18 @@
+//tryがアクション名でurlにアクションのパスを設定
+= simple_form_for :try_result, { url: try_result_path } do |f|
+  = f.input :date_from, as: :date
+  = f.input :date_to, as: :date
+  = f.input :place,
+    as: :select,
+    collection: [["東京", "東京"],
+                 ["阪神", "阪神"],
+                 ["函館", "函館"],
+                 ["札幌", "札幌"],
+                 ["中山", "中山"]]
+  br
+  - for num in 1..16 do
+    = f.input 'border_start' << num.to_s, as: :float
+    br
+  = f.button :submit, "Try"
+
+

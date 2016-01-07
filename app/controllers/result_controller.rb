@@ -3,47 +3,67 @@ require_relative '../util/numeric.rb'
 class ResultController < ApplicationController
   PopularityCondition = Struct.new(:popularity, :border_start, :border_end)
   def result
-    # postされてきた値を取得(さすがにconditionのstructでまとめた方が良いと思う)
-    @date_from = Date.new(
-      params['result']['date_from(1i)'].to_i,
-      params['result']['date_from(2i)'].to_i,
-      params['result']['date_from(3i)'].to_i
-      )
-    @date_to = Date.new(
-      params['result']['date_to(1i)'].to_i,
-      params['result']['date_to(2i)'].to_i,
-      params['result']['date_to(3i)'].to_i
-      )
-    @place = params[:result][:place]
-    @border_down = params[:result][:border_down]
-
-    # 人気順をあるだけ取得
-    @pop_cons = []
-    for num in 1..18 do
-      unless params['result']['popularity' << num.to_s].nil? then
-        @pop_cons << PopularityCondition.new(
-                      params['result']['popularity' << num.to_s].to_i,
-                      params['result']['border_start' << num.to_s].to_f,
-                      params['result']['border_end' << num.to_s].to_f
-                     )
-      end
-    end
-    # 計算結果を格納
-    pop_results = @pop_cons.map do |pop_con|
-                    calc_results(@date_from,
-                                 @date_to,
-                                 @place,
-                                 pop_con.popularity,
-                                 pop_con.border_start,
-                                 pop_con.border_end)
-                  end
+    # postされてきた値をセット
+    set_post_value('result')
+    # 各人気順を計算
+    pops_calc_results = @pops_cons.map do |pop_con|
+                          calc_results(@date_from,
+                                       @date_to,
+                                       @place,
+                                       pop_con.popularity,
+                                       pop_con.border_start,
+                                       pop_con.border_end)
+                        end
     # pop_conをkey, pop_resultをvalueにしたハッシュ
-    con_results_hash = Hash[@pop_cons.zip(pop_results)]
+    con_results_hash = Hash[@pops_cons.zip(pops_calc_results)]
     # 結果をグラフに描画
     draw_graphs(con_results_hash)
   end
 
-  # border_startからborder_endまで0.1刻みで計算
+  def try_result
+    set_post_value('try_result')
+    binding.pry
+    # 値が入ってこなかった場合は計算しない(順番がずれないように注意)
+    pops_calc_results = @pops_cons.map do |pop_con|
+                          horce_results = get_target_horce_results(@date_from,
+                                                                   @date_to,
+                                                                   @place,
+                                                                   pop_con.popularity)
+                          simulate_races(horce_results, pop_con.border_start)
+                        end
+    binding.pry
+  end
+
+  def set_post_value(action)
+    # postされてきた値を取得(さすがにconditionのstructでまとめた方が良いと思う)
+    @date_from = Date.new(
+      params[action]['date_from(1i)'].to_i,
+      params[action]['date_from(2i)'].to_i,
+      params[action]['date_from(3i)'].to_i
+      )
+    @date_to = Date.new(
+      params[action]['date_to(1i)'].to_i,
+      params[action]['date_to(2i)'].to_i,
+      params[action]['date_to(3i)'].to_i
+      )
+    @place = params[action][:place]
+    @border_down = params[action][:border_down]
+
+    # 人気順をあるだけ取得
+    @pops_cons = []
+    for num in 1..18 do
+      unless params[action]['border_start' << num.to_s].nil? then
+        @pops_cons << PopularityCondition.new(
+                      # 範囲計算の方要修正
+                      num.to_s,
+                      params[action]['border_start' << num.to_s].to_f,
+                      params[action]['border_end' << num.to_s].to_f
+                     )
+      end
+    end
+  end
+
+  # 単体で計算できるように分けたほうがいい
   def calc_results(date_from, date_to, place, popularity, border_start, border_end)
     horce_results = get_target_horce_results(date_from, date_to, place, popularity)
     results_hash = {}

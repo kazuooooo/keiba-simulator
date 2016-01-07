@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+[class^="result_popularity"],
+[class*=" result_popularity"] {
+  display: inline-block;
+}
+[class^="result_border_start"],
+[class*=" result_border_start"] {
+  display: inline-block;
+}
+[class^="result_border_end"],
+[class*=" result_border_end"] {
+  display: inline-block;
+}
