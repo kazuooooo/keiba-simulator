@@ -33,7 +33,6 @@ class ResultController < ApplicationController
   end
 
   def set_post_value(action)
-    # postされてきた値を取得(さすがにconditionのstructでまとめた方が良いと思う)
     @date_from = Date.new(
       params[action]['date_from(1i)'].to_i,
       params[action]['date_from(2i)'].to_i,
