@@ -30,6 +30,9 @@ class ResultController < ApplicationController
                                                                    pop_con.popularity)
                           calc(horce_results, pop_con.border_start)
                         end
+    con_results_hash = Hash[@pops_cons.zip(pops_calc_results)]
+    # 結果をグラフに描画
+    draw_try_graph(con_results_hash)
   end
 
   def set_post_value(action)
@@ -113,7 +116,6 @@ class ResultController < ApplicationController
     end
   end
 
-  # グラフを描画
   def draw_graphs(con_results_hash)
     @graphs = []
     con_results_hash.each do |con, results|
@@ -131,6 +133,22 @@ class ResultController < ApplicationController
         f.xAxis(categories: border_array)
         f.series(name: '結果(円)', data: result_array)
       end
+    end
+  end
+
+  def draw_try_graph(con_results_hash)
+    xAxis_categories = []
+    data            = []
+    con_results_hash.each do |con, result|
+      xAxis_categories << con.popularity
+      data << result
+    end
+
+    @graph_data = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title(text: '結果')
+      f.xAxis(categories: xAxis_categories)
+      f.options[:yAxis] = [{ title: { text: '円' }}, { title: { text: 'y軸2のタイトル'}, opposite: true}]
+      f.series(name: '結果',     data: data, type: 'column', yAxis: 1)
     end
   end
 end
