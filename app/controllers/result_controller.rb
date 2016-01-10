@@ -34,6 +34,15 @@ class ResultController < ApplicationController
     con_results_hash = Hash[@pops_cons.zip(pops_calc_results)]
     # 結果をグラフに描画
     draw_try_graph(con_results_hash)
+    @table_data = pops_calc_results
+    @table_data.each do |pops_calc_result|
+      pops_calc_result[:win_races].each do |win_race|
+        puts win_race.race.date
+        puts win_race.race.race_num
+        puts win_race.horce_result.popularity
+        puts win_race.horce_result.odds
+      end
+    end
   end
 
   def set_post_value(action)
@@ -158,12 +167,24 @@ class ResultController < ApplicationController
     money_data       = []
     win_count_data   = []
     race_count_data  = []
+    money_data_total = 0
+    win_count_total  = 0
+    race_count_total = 0
+
     con_results_hash.each do |con, result|
       xAxis_categories << con.popularity
-      money_data << result[:money]
-      win_count_data << result[:win_race_count]
-      race_count_data << (result[:win_race_count] + result[:lose_race_count])
+      money_data       << result[:money]
+      win_count_data   << result[:win_race_count]
+      race_count_data  << (result[:win_race_count] + result[:lose_race_count])
+      money_data_total += result[:money]
+      win_count_total  += result[:win_race_count]
+      race_count_total += (result[:win_race_count] + result[:lose_race_count])
     end
+
+    xAxis_categories << 'total'
+    money_data       << money_data_total
+    win_count_data   << win_count_total
+    race_count_data  << race_count_total
 
     @graph_data = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: '結果')
