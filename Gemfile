@@ -36,6 +36,7 @@ gem 'simple_form'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'mechanize'
 # for making graph
 gem "lazy_high_charts"
 group :development, :test do

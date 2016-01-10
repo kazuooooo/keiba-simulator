@@ -3,4 +3,6 @@ class HomeController < ApplicationController
   end
   def try_home
   end
+  def bet_check
+  end
 end
