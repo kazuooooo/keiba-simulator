@@ -3,31 +3,50 @@ require 'pry'
 # 最新のオッズ情報を取得して返す
 class BetCheckScraper
 
-  class Race < Struct.new(:date, :place, :race_num); end
-  class Horce < Struct.new(:ranking, :frame_num, :horce_num, :horce_name, :popularity, :odds); end
+  class Race < Struct.new(:title, :race_num, :horce_objs); end
+  class Horce < Struct.new(:horce_num, :horce_name, :tansyo, :fukusyo_min, :fukusyo_max); end
 
   def scrape
-    # ペーじ取得
+    # ぺージ取得
     agent = Mechanize.new
-    odds_home = agent.get('http://race.netkeiba.com/')
-    binding.pry
-    # 今日の各競馬場のリンクをクリック
-    place_home_pages = get_place_home_pages(odds_home)
+    # オッズぺージにアクセス
+    agent.post('http://www.jra.go.jp/JRADB/accessO.html', {
+                "cname" => "pw15oli00/6D"
+              })
+    # 中山にアクセス
+    agent.post('http://www.jra.go.jp/JRADB/accessO.html', {
+                "cname" => "pw15orl10062016010320160110/B3"
+              })
+    # 1Rにアクセス
+    agent.post('http://www.jra.go.jp/JRADB/accessO.html', {
+                "cname" => "pw151ou1006201601030120160110Z/C0"
+              })
+    # データをスクレイピング
+    html = Nokogiri::HTML(agent.page.body)
 
-    # 各競馬場に対して最新のオッズを取得
-    places_odds = place_home_pages.map do |place_home_page|
-                    get_races_odds(place_home_page)
-                  end
+    # 馬情報
+    horces = html.css('.ozTanfukuTableUma tr:not(:first-child)')
+    horce_objs = horces.map do |horce|
+                   Horce.new(
+                    horce.css('.umaban').inner_text,
+                    horce.css('.bamei').inner_text,
+                    horce.css('.oztan').inner_text.lstrip,
+                    horce.css('.fukuMin').inner_text.lstrip,
+                    horce.css('.fukuMax').inner_text.lstrip
+                   )
+                 end
+
+    # レース情報
+    race_obj = Race.new(
+                 html.css('.raceTtlTable tr').inner_text.strip,
+                 html.css('.raceNMTable tr > td').inner_text.strip,
+                 horce_objs
+               )
   end
 end
-#<Mechanize::Page::Link "1/10(日)" "/keiba/calendar/2016/1/0110.html">
 
-def get_place_home_pages(odds_home)
-  place_home_links = odds_home.links.select do |link|
-                       /#{Time.now.month}\/#{Time.now.mday}/ === link.text
-                     end
-  binding.pry
-  place_home_pages = place_home_links.map{ |link| begin link.click rescue retry end}
+def get_place_home_pages(agent)
+
 end
 
 def get_races_odds(place_home_page)
@@ -45,5 +64,4 @@ def scrape_race_odds(race_page)
 
 end
 
-BetCheckScraper.new.scrape
-
+sample = BetCheckScraper.new.scrape
