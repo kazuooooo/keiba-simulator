@@ -22,6 +22,8 @@ class ResultController < ApplicationController
   end
 
   def try_result
+    # slack飛ばしてみる
+    # Slack.chat_postMessage(text: "helloooooooooo", username: "Opinion Notifier", channel: "#keibabotmain")
     set_post_value('try_result')
     # 値が入ってこなかった場合は計算しない(順番がずれないように注意)
     pops_calc_results = @pops_cons.map do |pop_con|

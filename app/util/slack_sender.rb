@@ -1,3 +1,0 @@
-class SlackSender
-  # token xoxp-18179319377-18175865541-18176295269-90c7a002df
-end

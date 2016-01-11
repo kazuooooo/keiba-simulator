@@ -1,5 +1,6 @@
 require 'mechanize'
 require 'pry'
+
 # 最新のオッズ情報を取得して返す
 class BetCheckScraper
 
@@ -34,7 +35,6 @@ class BetCheckScraper
       # 戻る
       agent.back
     end
-    binding.pry
   end
 
   def scraping_data(page_body)
@@ -61,25 +61,4 @@ class BetCheckScraper
                )
   end
 end
-
-
-def get_place_home_pages(agent)
-
-end
-
-def get_races_odds(place_home_page)
-  race_pages = get_race_pages(place_home_page)
-  races_odds = race_pages.map do |race_page|
-                 scrape_race_odds(race_page)
-               end
-end
-
-def get_race_pages(place_home_page)
-
-end
-
-def scrape_race_odds(race_page)
-
-end
-
 sample = BetCheckScraper.new.scrape
