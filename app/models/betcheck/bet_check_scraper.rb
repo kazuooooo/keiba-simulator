@@ -22,18 +22,24 @@ class BetCheckScraper
     race_post_values = html_nakayama.css('.raceList2Area tr td.raceNo a').map do |link|
                          link.attributes["onclick"].value.match(/'p.*'/).to_s.gsub("\'", "")
                        end
+    races = []
     # 各Rリンクに対して
-
+    race_post_values.each do |race_post_value|
       # アクセスする
-      # データをスクレイピング
+      agent.post('http://www.jra.go.jp/JRADB/accessO.html',
+                  { "cname" => race_post_value }
+                )
+      # データをスクレイピングする
+      races << scraping_data(agent.page.body)
       # 戻る
+      agent.back
+    end
+    binding.pry
+  end
 
-    # 1Rにアクセス
-    agent.post('http://www.jra.go.jp/JRADB/accessO.html', {
-                "cname" => "pw151ou1006201601030120160110Z/C0"
-              })
+  def scraping_data(page_body)
     # データをスクレイピング
-    html = Nokogiri::HTML(agent.page.body)
+    html = Nokogiri::HTML(page_body)
 
     # 馬情報
     horces = html.css('.ozTanfukuTableUma tr:not(:first-child)')
@@ -55,6 +61,7 @@ class BetCheckScraper
                )
   end
 end
+
 
 def get_place_home_pages(agent)
 
