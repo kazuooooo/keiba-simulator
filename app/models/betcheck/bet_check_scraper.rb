@@ -17,6 +17,17 @@ class BetCheckScraper
     agent.post('http://www.jra.go.jp/JRADB/accessO.html', {
                 "cname" => "pw15orl10062016010320160110/B3"
               })
+    # 各レースのcname値を取得
+    html_nakayama = Nokogiri::HTML(agent.page.body)
+    race_post_values = html_nakayama.css('.raceList2Area tr td.raceNo a').map do |link|
+                         link.attributes["onclick"].value.match(/'p.*'/).to_s.gsub("\'", "")
+                       end
+    # 各Rリンクに対して
+
+      # アクセスする
+      # データをスクレイピング
+      # 戻る
+
     # 1Rにアクセス
     agent.post('http://www.jra.go.jp/JRADB/accessO.html', {
                 "cname" => "pw151ou1006201601030120160110Z/C0"
