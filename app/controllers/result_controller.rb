@@ -2,6 +2,7 @@
 require_relative '../util/numeric.rb'
 class ResultController < ApplicationController
   PopularityCondition = Struct.new(:popularity, :border_start, :border_end)
+  WinRaceInfo = Struct.new(:race, :horce_result)
   def analyze_result
     # postされてきた値をセット
     set_post_value('analyze_result')
@@ -33,6 +34,15 @@ class ResultController < ApplicationController
     con_results_hash = Hash[@pops_cons.zip(pops_calc_results)]
     # 結果をグラフに描画
     draw_try_graph(con_results_hash)
+    @table_data = pops_calc_results
+    @table_data.each do |pops_calc_result|
+      pops_calc_result[:win_races].each do |win_race|
+        puts win_race.race.date
+        puts win_race.race.race_num
+        puts win_race.horce_result.popularity
+        puts win_race.horce_result.odds
+      end
+    end
   end
 
   def set_post_value(action)
@@ -93,19 +103,35 @@ class ResultController < ApplicationController
 
   # 計算して結果を返す
   def calc(horce_results, border)
-    result = 0
+    money = 0
+    win_races = []
+    race_count = 0
     # 各HorceResultに対して
     horce_results.each do |horce_result|
       ## オッズがborderより上じゃない場合は買わないので飛ばす
       # if horce_result.odds > border
       if border_judge(horce_result.odds, border)
         ### 馬券を買うので100円引く
-        result -= 100
+        money -= 100
+        race_count += 1
         ### 着順が1位の場合オッズ✖︎100円を合計にたす
-        result += 100 * horce_result.odds if horce_result.ranking == 1
+        if horce_result.ranking == 1
+          money += 100 * horce_result.odds
+          win_races << WinRaceInfo.new(
+                         horce_result.race,
+                         horce_result
+                       )
+        end
       end
     end
-    result
+
+    lose_race_count = race_count - win_races.size
+    return {
+      :money => money,
+      :win_races => win_races,
+      :win_race_count => win_races.size,
+      :lose_race_count => lose_race_count
+    }
   end
 
   def border_judge(odds, border)
@@ -138,17 +164,35 @@ class ResultController < ApplicationController
 
   def draw_try_graph(con_results_hash)
     xAxis_categories = []
-    data            = []
+    money_data       = []
+    win_count_data   = []
+    race_count_data  = []
+    money_data_total = 0
+    win_count_total  = 0
+    race_count_total = 0
+
     con_results_hash.each do |con, result|
       xAxis_categories << con.popularity
-      data << result
+      money_data       << result[:money]
+      win_count_data   << result[:win_race_count]
+      race_count_data  << (result[:win_race_count] + result[:lose_race_count])
+      money_data_total += result[:money]
+      win_count_total  += result[:win_race_count]
+      race_count_total += (result[:win_race_count] + result[:lose_race_count])
     end
+
+    xAxis_categories << 'total'
+    money_data       << money_data_total
+    win_count_data   << win_count_total
+    race_count_data  << race_count_total
 
     @graph_data = LazyHighCharts::HighChart.new('graph') do |f|
       f.title(text: '結果')
       f.xAxis(categories: xAxis_categories)
-      f.options[:yAxis] = [{ title: { text: '円' }}, { title: { text: 'y軸2のタイトル'}, opposite: true}]
-      f.series(name: '結果',     data: data, type: 'column', yAxis: 1)
+      f.options[:yAxis] = [{ title: { text: '円' }}, { title: { text: 'レース数'}, opposite: true}]
+      f.series(name: 'お金', data: money_data, type: 'column', yAxis: 0)
+      f.series(name: '勝利レース数', data: win_count_data, type: 'column', yAxis: 1)
+      f.series(name: '合計レース数', data: race_count_data, type: 'column', yAxis: 1)
     end
   end
 end
