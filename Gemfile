@@ -58,8 +58,10 @@ group :development do
   gem 'guard'
   gem 'guard-rspec'
   gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'hirb-unicode'
+  gem 'awesome_print'
 end
 

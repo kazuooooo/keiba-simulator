@@ -1,37 +1,19 @@
 div
   ul.nav.nav-tabs role="tablist"
     li.active role="presentation"
-      a aria-controls="nakayama" data-toggle="tab" href="#home" role="tab"  中山
+      a aria-controls="nakayama" data-toggle="tab" href="#nakayama" role="tab"  中山
     li role="presentation"
-      a aria-controls="kyoto" data-toggle="tab" href="#profile" role="tab"  京都
+      a aria-controls="kyoto" data-toggle="tab" href="#kyoto" role="tab"  京都
     li role="presentation"
-      a aria-controls="messages" data-toggle="tab" href="#messages" role="tab"  中京
+      a aria-controls="messages" data-toggle="tab" href="#chukyo" role="tab"  中京
     li role="presentation"
-      a aria-controls="settings" data-toggle="tab" href="#settings" role="tab"  東京
+      a aria-controls="settings" data-toggle="tab" href="#tokyo" role="tab"  東京
   .tab-content
     #nakayama.tab-pane.active role="tabpanel"
-      - @odds_data.each do |race|
-        p = race.title
-        p = race.race_num
-        table.table.table-striped.table-bordered.table-hover
-          thead
-            tr
-              th 人気順
-              th 馬番
-              th 馬名
-              th 単勝オッズ
-              th 複勝オッズMin
-              th 複勝オッズMax
-            - ordered_horces = race.horce_objs.sort_by{|horce| horce.tansyo}
-            - ordered_horces.each_with_index do |horce, idx|
-              tbody
-                tr
-                  td = (idx+1).to_s
-                  td = horce.horce_num
-                  td = horce.horce_name
-                  td = horce.tansyo
-                  td = horce.fukusyo_min
-                  td = horce.fukusyo_max
-    #kyoto.tab-pane role="tabpanel"  京都
-    #chukyo.tab-pane role="tabpanel"  中京
-    #tokyo.tab-pane role="tabpanel"  東京
+      = render partial: "odds_table", locals: { odds_data: @odds_data, place: "中山" }
+    #kyoto.tab-pane role="tabpanel"
+      = render partial: "odds_table", locals: { odds_data: @odds_data, place: "京都" }
+    #chukyo.tab-pane role="tabpanel"
+      = render partial: "odds_table", locals: { odds_data: @odds_data, place: "中京" }
+    #tokyo.tab-pane role="tabpanel"
+      = render partial: "odds_table", locals: { odds_data: @odds_data, place: "東京" }
