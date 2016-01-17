@@ -3,8 +3,8 @@ require 'mechanize'
 # 最新のオッズ情報を取得して返す
 module BetCheckScraper
   include Util
-  class Race < Struct.new(:title, :race_num, :horce_objs); end
-  class Horce < Struct.new(:horce_num, :horce_name, :tansyo, :fukusyo_min, :fukusyo_max); end
+  class StructRace < Struct.new(:title, :race_num, :horce_objs); end
+  class StructHorce < Struct.new(:horce_num, :horce_name, :tansyo, :fukusyo_min, :fukusyo_max); end
 
   def scrape_odds_data
     agent = Mechanize.new
@@ -12,9 +12,7 @@ module BetCheckScraper
     agent.post('http://www.jra.go.jp/JRADB/accessO.html', {
                 "cname" => "pw15oli00/6D"
               })
-    # 今日のthにアクセス
     # 今日レースのある会場のcnameを配列で取得
-    #cnames =
     html_odds_home = Nokogiri::HTML(agent.page.body)
     # 今日のthを取得
     today_th_node = html_odds_home.css(".joSelect tr th").select {|n| n.text =~ /#{Date.today.month}月#{Date.today.day}日/}
@@ -61,7 +59,7 @@ module BetCheckScraper
     # 馬情報
     horces = html.css('.ozTanfukuTableUma tr:not(:first-child)')
     horce_objs = horces.map do |horce|
-                   Horce.new(
+                   StructHorce.new(
                     horce.css('.umaban').inner_text.to_i,
                     horce.css('.bamei').inner_text,
                     horce.css('.oztan').inner_text.lstrip.to_f,
@@ -71,7 +69,7 @@ module BetCheckScraper
                  end
 
     # レース情報
-    race_obj = Race.new(
+    race_obj = StructRace.new(
                  html.css('.raceTtlTable tr').inner_text.strip,
                  html.css('.raceNMTable tr > td').inner_text.strip,
                  horce_objs

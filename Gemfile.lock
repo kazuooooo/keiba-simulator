@@ -159,8 +159,14 @@ GEM
     pry-byebug (3.3.0)
       byebug (~> 8.0)
       pry (~> 0.10)
+    pry-doc (0.8.0)
+      pry (~> 0.9)
+      yard (~> 0.8)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    pry-stack_explorer (0.4.9.2)
+      binding_of_caller (>= 0.7)
+      pry (>= 0.9.11)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -253,6 +259,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    tapp (1.5.0)
+      thor
     temple (0.7.6)
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
@@ -286,6 +294,7 @@ GEM
     websocket-driver (0.6.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    yard (0.8.7.6)
 
 PLATFORMS
   ruby
@@ -300,6 +309,7 @@ DEPENDENCIES
   execjs
   guard
   guard-rspec
+  hirb
   hirb-unicode
   jbuilder (~> 2.0)
   jquery-rails
@@ -309,7 +319,9 @@ DEPENDENCIES
   mysql2
   pry
   pry-byebug
+  pry-doc
   pry-rails
+  pry-stack_explorer
   rails (= 4.2.5)
   rails-erd
   rspec
@@ -320,6 +332,7 @@ DEPENDENCIES
   slack-api
   slim
   spring
+  tapp
   therubyracer
   turbolinks
   twitter-bootstrap-rails
