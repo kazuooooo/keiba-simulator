@@ -1,6 +1,4 @@
 class HomeController < ApplicationController
-  FruitsBox = Struct.new(:name, :amount)
-  FruitsBoxes = []
   def index
   end
   def try_home
