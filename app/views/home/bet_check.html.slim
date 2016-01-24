@@ -65,10 +65,10 @@ div
       a aria-controls="settings" data-toggle="tab" href="#tokyo" role="tab"  東京
   .tab-content
     #nakayama.tab-pane.active role="tabpanel"
-      = render partial: "odds_table", locals: { odds_data: @odds_data, place: "中山" }
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中山" }
     #kyoto.tab-pane role="tabpanel"
-      = render partial: "odds_table", locals: { odds_data: @odds_data, place: "京都" }
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "京都" }
     #chukyo.tab-pane role="tabpanel"
-      = render partial: "odds_table", locals: { odds_data: @odds_data, place: "中京" }
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中京" }
     #tokyo.tab-pane role="tabpanel"
-      = render partial: "odds_table", locals: { odds_data: @odds_data, place: "東京" }
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "東京" }

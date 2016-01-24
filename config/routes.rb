@@ -4,8 +4,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'home#index'
-  get '/try_home' => 'home#try_home'
+  get '/try_home'  => 'home#try_home'
   get '/bet_check' => 'home#bet_check'
+  get '/analyze'   => 'home#analyze'
   # Example of regular route:
   post '/analyze_result' => 'result#analyze_result'
   post '/try_result' => 'result#try_result'

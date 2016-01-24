@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   def index
-    @betcondition = Betcondition.new
-    # ちょっと一旦Scafoldの作りかた見たほうがいい
+  end
+
+  def analyze
   end
 
   def try_home
