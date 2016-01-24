@@ -6,7 +6,9 @@ class HomeController < ApplicationController
   end
 
   def try_home
+    @bet_condition = Betcondition.new
   end
+
   def bet_check
     @odds_data = BetCheckScraper.scrape_odds_data
   end

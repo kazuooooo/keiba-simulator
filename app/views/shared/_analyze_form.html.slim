@@ -13,8 +13,6 @@
                  ["京都", "京都"],
                  ["阪神", "阪神"],
                  ["小倉", "小倉"]]
-  p border down?
-  = f.input_field :border_down, as: :boolean
   br
   - for num in 1..18 do
     = f.input 'border_start' << num.to_s, as: :decimal
