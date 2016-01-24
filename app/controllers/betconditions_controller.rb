@@ -19,7 +19,14 @@ class BetconditionsController < ApplicationController
     params.require(:betcondition).permit(:place_id,
                                          :start_date,
                                          :end_date,
-                                         :popconditions_attributes => [:id, :popularity, :betcondition_id, :_destroy ])
+                                         :popconditions_attributes => [:id,
+                                                                       :popularity,
+                                                                       :betcondition_id,
+                                                                       :odds_start,
+                                                                       :odds_end,
+                                                                       :_destroy,
+                                                                       ]
+                                        )
   end
 
 end
