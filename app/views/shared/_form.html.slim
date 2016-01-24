@@ -1,0 +1,33 @@
+= simple_form_for betcondition do |f|
+  = f.input :start_date, as: :date
+  = f.input :end_date, as: :date
+  = f.input :place_id,
+    as: :select,
+    collection: [["札幌", 1],
+                 ["函館", 2],
+                 ["福島", 3],
+                 ["新潟", 4],
+                 ["東京", 5],
+                 ["中山", 6],
+                 ["中京", 7],
+                 ["京都", 8],
+                 ["阪神", 9],
+                 ["小倉", 10]]
+  = f.input_field :border_down, as: :boolean
+  / br
+  / - for num in 1..18 do
+  /   = f.input 'border_start' << num.to_s, as: :float
+  /   = f.input 'border_end' << num.to_s, as: :float
+  /   br
+  = f.button :submit, "Calc"
+
+/ = form_for @team do |f|
+/   = f.text_field :name, placeholder: 'グループ名を入力してください', cols: '30', rows: '10', autofocus: 'true', class: 'form-control'
+/   = f.text_area :description, placehoder: 'グループの説明を入力してください', autofocus: 'true', class: 'form-control'
+/   = f.file_field :logo
+/   = f.fields_for :members do |m|
+/     = m.text_field :nickname
+/     = m.file_field :avatar
+/   = f.submit '作成する', class: 'btn btn-primary'
+
+
