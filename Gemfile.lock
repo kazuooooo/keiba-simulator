@@ -144,6 +144,7 @@ GEM
     multipart-post (2.0.0)
     mysql2 (0.4.2)
     nenv (0.2.0)
+    nested_form (0.3.2)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
     nokogiri (1.6.7.1)
@@ -317,6 +318,7 @@ DEPENDENCIES
   less-rails
   mechanize
   mysql2
+  nested_form
   pry
   pry-byebug
   pry-doc

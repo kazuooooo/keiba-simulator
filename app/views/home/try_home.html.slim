@@ -1,7 +1,9 @@
-= simple_form_for(@bet_condition) do |f|
-  = f.input :place_id
+= nested_form_for(@bet_condition) do |f|
+  = f.number_field :place_id
   = f.date_field  :start_date
   = f.date_field  :end_date
-  = f.fields_for :popcondition do |f_pop_condition|
-    = f_pop_condition.input :popularity
+  = f.fields_for :popconditions do |f_pop_condition|
+    = f_pop_condition.number_field :popularity
+    = f_pop_condition.link_to_remove "Remove Popularity"
+  = f.link_to_add "Add Popularity", :popconditions
   = f.submit
