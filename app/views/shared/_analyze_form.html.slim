@@ -17,7 +17,7 @@
   = f.input_field :border_down, as: :boolean
   br
   - for num in 1..18 do
-    = f.input 'border_start' << num.to_s, as: :float
-    = f.input 'border_end' << num.to_s, as: :float
+    = f.input 'border_start' << num.to_s, as: :decimal
+    = f.input 'border_end' << num.to_s, as: :decimal
     br
   = f.button :submit, "Calc"
