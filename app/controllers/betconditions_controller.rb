@@ -16,7 +16,8 @@ class BetconditionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
   def betcondition_params
-    params.require(:betcondition).permit(:place_id,
+    params.require(:betcondition).permit(:name,
+                                         :place_id,
                                          :start_date,
                                          :end_date,
                                          :popconditions_attributes => [:id,

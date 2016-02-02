@@ -1,7 +1,8 @@
 = nested_form_for(@bet_condition) do |f|
+  = f.text_field   :name
   = f.number_field :place_id
-  = f.date_field  :start_date
-  = f.date_field  :end_date
+  = f.date_field   :start_date
+  = f.date_field   :end_date
   = f.fields_for :popconditions do |f_pop_condition|
     = f_pop_condition.number_field :popularity
     = f_pop_condition.number_field :odds_start

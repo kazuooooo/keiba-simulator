@@ -10,6 +10,7 @@ class HomeController < ApplicationController
   end
 
   def bet_check
-    @odds_data = BetCheckScraper.scrape_odds_data
+    @odds_data      = BetCheckScraper.scrape_odds_data
+    @bet_conditions = Betcondition.all
   end
 end

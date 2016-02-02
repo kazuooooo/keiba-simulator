@@ -1,6 +1,6 @@
 # FIXME: 本来ここから読むべきではないはず
 require_relative '../util/numeric.rb'
-require_relative '../util/bet_check_scraper'
+# require_relative '../util/bet_check_scraper'
 class ResultController < ApplicationController
   PopularityCondition = Struct.new(:popularity, :border_start, :border_end)
   # WinRaceInfo = Struct.new(:race, :horce_result)

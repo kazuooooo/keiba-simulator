@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160124102453) do
+ActiveRecord::Schema.define(version: 20160202151943) do
 
   create_table "betconditions", force: :cascade do |t|
     t.integer  "place_id",   limit: 4
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "name",       limit: 255
   end
 
   create_table "horceresults", force: :cascade do |t|

@@ -1,58 +1,14 @@
 #pricing-table.pricing-table
-  ul
-    li.heading
-      | Bronze
-    li.price
-      | £20
-    li
-      | Starter package
-    li
-      | 15 Projects
-    li
-      |  -
-    li
-      |  -
-    li
-      |  -
-    li.action
-      a[href=""]
-        | Buy Now
-  ul
-    li.heading
-      | Silver
-    li.price
-      | £60
-    li
-      | Intermediate package
-    li
-      | 20 Projects
-    li
-      |  -
-    li
-      |  -
-    li
-      |  -
-    li.action
-      a[href=""]
-        | Buy Now
-  ul
-    li.heading
-      | Gold
-    li.price
-      | £80
-    li
-      | Professional package
-    li
-      | 30 Projects
-    li
-      |  -
-    li
-      |  -
-    li
-      |  -
-    li.action
-      a[href=""]
-        | Buy Now
+  - @bet_conditions.each do |betcondition|
+    ul
+      li.heading
+        = betcondition.name
+        - betcondition.popconditions.each do |popcondition|
+          li
+            = "#{popcondition.popularity}番人気\(#{popcondition.odds_start}~#{popcondition.odds_end}\)"
+      li.action
+        a[href=""]
+          | Check
 div
   ul.nav.nav-tabs role="tablist"
     li.active role="presentation"
