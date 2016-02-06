@@ -4,7 +4,7 @@ class BetconditionsController < ApplicationController
     # @betcondition.build_popcondition
     respond_to do |format|
       if @betcondition.save
-        format.html { redirect_to root_path, notice: 'betcondition was successfully created.' }
+        format.html { redirect_to try_result_path, notice: 'betcondition was successfully created.' }
       else
         format.html { redirect_to root_path, notice: 'betcondition was failed to create.' }
       end

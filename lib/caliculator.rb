@@ -1,6 +1,15 @@
 module Caliculator
   WinRaceInfo = Struct.new(:race, :horce_result)
 
+  def calc_try(betcondition)
+    # 各popconについてresultを計算
+    try_results_hash = {}
+    betcondition.popconditions.each do |popcon|
+      try_results_hash[popcon] = calc_sum(betcondition.start_date, betcondition.end_date, betcondition.place, popcon)
+    end
+    try_results_hash
+  end
+
   def calc_range(date_from, date_to, place, popularity, odds_start, odds_end)
     horce_results = get_target_horce_results(date_from, date_to, place, popularity)
     results_hash = {}
@@ -13,17 +22,25 @@ module Caliculator
     results_hash
   end
 
+  def calc_sum(date_from, date_to, place, popcon)
+    horce_results = get_target_horce_results_v2(date_from, date_to, place, popcon)
+    calc_results  = calc(horce_results)
+  end
+
   # 検索条件に合うhorce_resultを取得
   def get_target_horce_results(date_from, date_to, place, popularity)
-    # まだまとめれる これでもまだ多分SQLが大量発行される
-    # horceresults = Horceresults.where(popularity: popularity).map do |horce_result|
-    #                   horce_result.race.where(date: date_from..date_to, place_id:Place.find_by(name: place))
-    #                end
     races = Race.where(date: date_from..date_to, place_id:Place.find_by(name: place))
     horceresults = races.map do |race|
                      race.horceresults.where(popularity: popularity)
                    end
     horceresults.flatten
+  end
+
+  # 条件に合う
+  def get_target_horce_results_v2(date_from, date_to, place, popcon)
+    result = Horceresult.joins(:race).where(horceresults: {popularity: popcon.popularity,
+                                                           odds: (popcon.odds_start)..(popcon.odds_end)},
+                                            races: {date: date_from..date_to})
   end
 
   # 計算して結果を返す

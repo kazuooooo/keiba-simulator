@@ -19,7 +19,7 @@ module GraphDrawer
     end
   end
 
-  def draw_try_graph(con_results_hash)
+  def draw_try_graph(try_results_hash)
     xAxis_categories = []
     money_data       = []
     win_count_data   = []
@@ -28,7 +28,7 @@ module GraphDrawer
     win_count_total  = 0
     race_count_total = 0
 
-    con_results_hash.each do |con, result|
+    try_results_hash.each do |con, result|
       xAxis_categories << con.popularity
       money_data       << result[:money]
       win_count_data   << result[:win_race_count]
