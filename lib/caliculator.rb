@@ -1,7 +1,7 @@
-class Caliculator
+module Caliculator
   WinRaceInfo = Struct.new(:race, :horce_result)
 
-  def self.calc_range(date_from, date_to, place, popularity, odds_start, odds_end)
+  def calc_range(date_from, date_to, place, popularity, odds_start, odds_end)
     horce_results = get_target_horce_results(date_from, date_to, place, popularity)
     results_hash = {}
     odds = odds_start
@@ -14,7 +14,7 @@ class Caliculator
   end
 
   # 検索条件に合うhorce_resultを取得
-  def self.get_target_horce_results(date_from, date_to, place, popularity)
+  def get_target_horce_results(date_from, date_to, place, popularity)
     # まだまとめれる これでもまだ多分SQLが大量発行される
     # horceresults = Horceresults.where(popularity: popularity).map do |horce_result|
     #                   horce_result.race.where(date: date_from..date_to, place_id:Place.find_by(name: place))
@@ -27,7 +27,7 @@ class Caliculator
   end
 
   # 計算して結果を返す
-  def self.calc(horce_results)
+  def calc(horce_results)
     money = 0
     win_races = []
     race_count = 0

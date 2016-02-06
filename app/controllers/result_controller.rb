@@ -3,10 +3,8 @@ require_relative '../util/numeric.rb'
 # require_relative '../util/bet_check_scraper'
 class ResultController < ApplicationController
   PopularityCondition = Struct.new(:popularity, :border_start, :border_end)
-  # WinRaceInfo = Struct.new(:race, :horce_result)
+  before_action :set_post_value, only: [:analyze_result]
   def analyze_result
-    # postされてきた値をセット
-    set_post_value('analyze_result')
     # 各人気順を計算
     pops_calc_results = @pops_cons.map do |pop_con|
                           Caliculator.calc_range(@date_from,
@@ -48,19 +46,12 @@ class ResultController < ApplicationController
     end
   end
 
-  def set_post_value(action)
-    @date_from = Date.new(
-      params[action]['date_from(1i)'].to_i,
-      params[action]['date_from(2i)'].to_i,
-      params[action]['date_from(3i)'].to_i
-      )
-    @date_to = Date.new(
-      params[action]['date_to(1i)'].to_i,
-      params[action]['date_to(2i)'].to_i,
-      params[action]['date_to(3i)'].to_i
-      )
-    @place = params[action][:place]
-    @border_down = params[action][:border_down]
+  def set_post_value
+    @date_from = Date.parse(params["analyze_result"]["date_from"])
+    @date_to   = Date.parse(params["analyze_result"]["date_to"])
+    binding.pry
+    @place     = params[action][:place]
+    binding.pry
 
     # 人気順をあるだけ取得
     @pops_cons = []
