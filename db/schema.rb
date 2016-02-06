@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227063938) do
+ActiveRecord::Schema.define(version: 20160202151943) do
+
+  create_table "betconditions", force: :cascade do |t|
+    t.integer  "place_id",   limit: 4
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "name",       limit: 255
+  end
 
   create_table "horceresults", force: :cascade do |t|
     t.float    "odds",       limit: 24
@@ -35,6 +44,15 @@ ActiveRecord::Schema.define(version: 20151227063938) do
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "popconditions", force: :cascade do |t|
+    t.integer  "popularity",      limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "betcondition_id", limit: 4
+    t.decimal  "odds_start",                precision: 10
+    t.decimal  "odds_end",                  precision: 10
   end
 
   create_table "races", force: :cascade do |t|

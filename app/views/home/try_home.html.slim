@@ -1,1 +1,12 @@
-= render partial: "form", locals: { action: :try_result, url: '/try_result' }
+= nested_form_for(@bet_condition) do |f|
+  = f.text_field   :name
+  = f.number_field :place_id
+  = f.date_field   :start_date
+  = f.date_field   :end_date
+  = f.fields_for :popconditions do |f_pop_condition|
+    = f_pop_condition.number_field :popularity
+    = f_pop_condition.number_field :odds_start
+    = f_pop_condition.number_field :odds_end
+    = f_pop_condition.link_to_remove "Remove Popularity"
+  = f.link_to_add "Add Popularity", :popconditions
+  = f.submit

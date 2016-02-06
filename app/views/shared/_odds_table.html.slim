@@ -1,0 +1,23 @@
+- if odds_data.has_key?(place)
+  - odds_data[place].each do |race|
+    p = race.title
+    p = race.race_num
+    table.table.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th 人気順
+          th 馬番
+          th 馬名
+          th 単勝オッズ
+          th 複勝オッズMin
+          th 複勝オッズMax
+        - ordered_horces = race.horce_objs.sort_by{|horce| horce.tansyo}
+      tbody
+        - ordered_horces.each_with_index do |horce, idx|
+          tr
+            td = (idx+1).to_s
+            td = horce.horce_num
+            td = horce.horce_name
+            td = horce.tansyo
+            td = horce.fukusyo_min
+            td = horce.fukusyo_max

@@ -30,12 +30,16 @@ gem 'execjs'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'pry'
+
 gem 'slim'
 gem 'simple_form'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
+gem 'mechanize'
+gem 'slack-api'
+gem 'nested_form'
+
 # for making graph
 gem "lazy_high_charts"
 group :development, :test do
@@ -54,9 +58,16 @@ group :development do
   gem 'spring'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'pry'
   gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'hirb'
   gem 'hirb-unicode'
+  gem 'awesome_print'
+  gem 'tapp'
 end
 
