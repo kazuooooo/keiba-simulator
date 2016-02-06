@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
   get '/try_home'  => 'home#try_home'
-  get '/bet_check' => 'home#bet_check'
+  get '/betcheck' => 'betcheck#index'
+  post '/betcheck/color_targets'
   get '/analyze'   => 'home#analyze'
   get '/ajax' => 'ajax#index'
   get '/ajax/upanel' => 'ajax#upanel'
