@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get '/try_home'  => 'home#try_home'
   get '/bet_check' => 'home#bet_check'
   get '/analyze'   => 'home#analyze'
+  get '/ajax' => 'ajax#index'
+  get '/ajax/upanel' => 'ajax#upanel'
   # Example of regular route:
   post '/analyze_result' => 'result#analyze_result'
   post '/try_result' => 'result#try_result'

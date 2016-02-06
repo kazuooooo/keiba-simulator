@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+
   def index
   end
 
@@ -12,5 +13,9 @@ class HomeController < ApplicationController
   def bet_check
     @odds_data      = BetCheckScraper.scrape_odds_data
     @bet_conditions = Betcondition.all
+  end
+
+  def upanel
+    @time = Time.now.to_s
   end
 end
