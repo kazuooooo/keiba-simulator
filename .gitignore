@@ -37,3 +37,6 @@ bower.json
 # Ignore pow environment settings
 .powenv
 csv_data/
+scraping_gem/lib/vcr/
+scraping_gem/lib/*.csv
+
