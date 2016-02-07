@@ -39,6 +39,7 @@ gem 'twitter-bootstrap-rails'
 gem 'mechanize'
 gem 'slack-api'
 gem 'nested_form'
+gem 'jc-validates_timeliness'
 
 # for making graph
 gem "lazy_high_charts"

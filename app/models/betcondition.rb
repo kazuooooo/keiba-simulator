@@ -8,11 +8,16 @@ class Betcondition < ActiveRecord::Base
   validates :place_id,
     presence: true
   validates :start_date,
-    presence: true
+    presence: true,
+    timeliness: {
+                  before: :end_date,
+                }
   validates :end_date,
     presence: true,
-    numericality: true,
-    greater_than: :start_date
+    timeliness: {
+                  after: :start_date,
+                  before: Date.today
+                }
 
 
   def meet_condition?(pop_rank, odds)
@@ -29,11 +34,11 @@ class Betcondition < ActiveRecord::Base
   end
 end
 
-  # create_table "betconditions", force: :cascade do |t|
-  #   t.integer  "place_id",   limit: 4
-  #   t.date     "start_date"
-  #   t.date     "end_date"
-  #   t.datetime "created_at",             null: false
-  #   t.datetime "updated_at",             null: false
-  #   t.string   "name",       limit: 255
-  # end
+# create_table "betconditions", force: :cascade do |t|
+#   t.integer  "place_id",   limit: 4
+#   t.date     "start_date"
+#   t.date     "end_date"
+#   t.datetime "created_at",             null: false
+#   t.datetime "updated_at",             null: false
+#   t.string   "name",       limit: 255
+# end
