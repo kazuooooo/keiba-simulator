@@ -40,6 +40,8 @@ gem 'mechanize'
 gem 'slack-api'
 gem 'nested_form'
 gem 'jc-validates_timeliness'
+gem 'bootstrap-select-rails'
+gem 'bootstrap-datepicker-rails'
 
 # for making graph
 gem "lazy_high_charts"

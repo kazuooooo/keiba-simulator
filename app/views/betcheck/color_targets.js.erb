@@ -1,3 +1,4 @@
+place = $(".active:first").text().trim();
 $('.tab-pane.active').html(
   "<%= render partial: 'shared/colored_odds_table',locals: { odds_data: @odds_data, place: @place} %>"
 );
