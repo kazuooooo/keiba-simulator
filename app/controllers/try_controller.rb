@@ -1,6 +1,7 @@
 class TryController < ApplicationController
   include Caliculator, GraphDrawer
   before_action :set_betcondition, only: [:result]
+  before_action :set_places, only: [:new]
   PopularityCondition = Struct.new(:popularity, :border_start, :border_end)
   def new
     @bet_condition = Betcondition.new
@@ -21,6 +22,10 @@ class TryController < ApplicationController
 
   def set_betcondition
     @betcondition = Betcondition.last
+  end
+
+  def set_places
+    @places = Place.all
   end
 
 end

@@ -5,7 +5,7 @@
       = f.text_field   :name, :class => "form-control"
     .place
       = f.label "場所", :class => "input-group-addon"
-      = f.number_field :place_id, :class => "form-control"
+      = f.collection_select(:place_id, @places, :id, :name,:class => "form-control")
     .date
       = f.label "開始日", :class => "input-group-addon"
       = f.date_field   :start_date, :class => "form-control"
