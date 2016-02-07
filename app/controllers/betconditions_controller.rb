@@ -6,7 +6,7 @@ class BetconditionsController < ApplicationController
       if @betcondition.save
         format.html { redirect_to try_result_path, notice: 'betcondition was successfully created.' }
       else
-        format.html { redirect_to root_path, notice: 'betcondition was failed to create.' }
+        format.html { redirect_to try_path, notice: @betcondition.errors }
       end
     end
   end
