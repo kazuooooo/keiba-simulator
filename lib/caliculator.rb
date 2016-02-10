@@ -36,7 +36,7 @@ module Caliculator
                    end
     horceresults.flatten
   end
-
+  # 52sec
   # 条件に合う
   def get_target_horce_results_v2(date_from, date_to, place, popcon)
     result = Horceresult.joins(:race).where(horceresults: {popularity: popcon.popularity,

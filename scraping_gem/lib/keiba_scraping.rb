@@ -18,7 +18,7 @@ module KeibaScraping
   class Race < Struct.new(:date, :place, :race_num); end
   # horce 着順、枠番、馬番、人気、オッズ
   class Horce < Struct.new(:ranking, :frame_num, :horce_num, :horce_name, :popularity, :odds); end
-  for year in 1986..2015
+  for year in 2005..2015
     csv_file = "#{year}.csv"
     # CSVヘッダー記載
     CSV.open(csv_file,"w") do |csv|
@@ -67,6 +67,14 @@ module KeibaScraping
                 # Race情報を取得
                 title_text = html.css('#raceTitDay').text
                 title_text_array = title_text.gsub(" ","").split("|")
+                if title_text_array.nil?
+                  binding.pry
+                  puts "aaa"
+                end
+                if title_text_array[1].nil?
+                  binding.pry
+                  puts "aaa"
+                end
                 # 日付
                 date = title_text_array[0]
                 # 場所
