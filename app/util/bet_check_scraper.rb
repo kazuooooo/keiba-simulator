@@ -14,8 +14,11 @@ module BetCheckScraper
               })
     # 今日レースのある会場のcnameを配列で取得
     html_odds_home = Nokogiri::HTML(agent.page.body)
-    # 1今日のthを取得 TODO: 今日のというか次の開催日で取得する必要あり
+    # 今日のthを取得
     today_th_node = html_odds_home.css(".joSelect tr th").select {|n| n.text =~ /#{Date.today.month}月#{Date.today.day}日/}
+    # 今日レースがない場合はリターンさせる
+    return nil if today_th_node.size.zero?
+    # (デバッグ用)
     # today_th_node = html_odds_home.css(".joSelect tr th").select {|n| n.text =~ /1月30日/}
 
     place_cname_hash = {}

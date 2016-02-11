@@ -3,7 +3,6 @@ module Caliculator
 
   def calc_try(betcondition)
     # 各popconについてresultを計算
-    binding.pry
     try_results_hash = {}
     betcondition.popconditions.each do |popcon|
       try_results_hash[popcon] = calc_sum(betcondition.start_date, betcondition.end_date, betcondition.place, popcon)
