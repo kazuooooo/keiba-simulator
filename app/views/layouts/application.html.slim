@@ -41,6 +41,23 @@ html lang="en"
             li= link_to "検証", try_path
             li= link_to "オッズチェック", betcheck_path
             li= link_to "分析", analyze_path
+          ul.nav.navbar-nav.navbar-right
+            li
+              p = "ようこそ#{header_user_name}さん"
+            li.dropdown
+              a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+                span.caret
+              ul.dropdown-menu
+                li
+                  a href="#"  ユーザー設定
+                li
+                  a href="#"  条件一覧
+                li
+                  a href="#"  Something else here
+                li.divider role="separator"
+                li
+                  =link_to "ログアウト", destroy_user_session_path, :method => :delete
+
     .container
       .row
         .col-lg-12
@@ -58,5 +75,5 @@ html lang="en"
         /! /span
       /! /row
       footer
-        p © Company 2015
+        p © Powered by Kazuya Matsumoto
     /! /container

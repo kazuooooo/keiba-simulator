@@ -1,6 +1,10 @@
 class BetconditionsController < ApplicationController
   def create
-    @betcondition = Betcondition.new(betcondition_params)
+    if user_signed_in?
+      @betcondition = current_user.betconditions.build(betcondition_params)
+    else
+      @betcondition = Betcondition.new(betcondition_params)
+    end
     # @betcondition.build_popcondition
     respond_to do |format|
       if @betcondition.save

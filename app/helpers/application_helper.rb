@@ -5,4 +5,8 @@ module ApplicationHelper
              params[action]['date_from(3i)'].to_i,
             )
   end
+
+  def header_user_name
+    user_signed_in? ? current_user.email : "ゲスト"
+  end
 end

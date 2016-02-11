@@ -20,16 +20,29 @@ ul.nav.nav-tabs role="tablist"
   li role="presentation"
     a aria-controls="settings" data-toggle="tab" href="#tokyo" role="tab"  東京
 .tab-content
+/ TODO:Refactoring
   #nakayama.tab-pane.active role="tabpanel"
     - place = "中山"
-    = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中山" }
+    - if @odds_data
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中山" }
+    - else
+      p 今日はレースがないよ
   #kyoto.tab-pane role="tabpanel"
     - place = "京都"
-    = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "京都" }
+    - if @odds_data
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "京都" }
+    - else
+      p 今日はレースがないよ
   #chukyo.tab-pane role="tabpanel"
-    = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中京" }
+    - if @odds_data
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中京" }
+    - else
+      p 今日はレースがないよ
   #tokyo.tab-pane role="tabpanel"
-    = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "東京" }
+    - if @odds_data
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "東京" }
+    - else
+      p 今日はレースがないよ
 div
   | 現在時刻：#{Time.now}
 #result
