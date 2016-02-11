@@ -42,6 +42,7 @@ gem 'nested_form'
 gem 'jc-validates_timeliness'
 gem 'bootstrap-select-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'devise'
 
 # for making graph
 gem "lazy_high_charts"
