@@ -19,3 +19,5 @@
 //= require highcharts/highcharts-more
 //= require highcharts/highstock
 //= require jquery_nested_form
+//= require bootstrap-select
+//= require bootstrap-datepicker

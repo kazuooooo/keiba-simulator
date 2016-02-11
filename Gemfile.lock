@@ -44,6 +44,9 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.5.0)
+      railties (>= 3.0)
+    bootstrap-select-rails (1.6.3)
     builder (3.2.2)
     bullet (4.14.10)
       activesupport (>= 3.0.0)
@@ -103,6 +106,8 @@ GEM
     jbuilder (2.3.2)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jc-validates_timeliness (3.1.1)
+      timeliness (~> 0.3.7)
     jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -269,6 +274,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
+    timeliness (0.3.8)
     turbolinks (2.5.3)
       coffee-rails
     twitter-bootstrap-rails (3.2.2)
@@ -304,6 +310,8 @@ DEPENDENCIES
   awesome_print
   better_errors
   binding_of_caller
+  bootstrap-datepicker-rails
+  bootstrap-select-rails
   bullet
   byebug
   coffee-rails (~> 4.1.0)
@@ -313,6 +321,7 @@ DEPENDENCIES
   hirb
   hirb-unicode
   jbuilder (~> 2.0)
+  jc-validates_timeliness
   jquery-rails
   lazy_high_charts
   less-rails

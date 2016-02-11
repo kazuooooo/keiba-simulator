@@ -6,8 +6,8 @@ table.table.table-striped.table-bordered.table-hover
       th レース番号
       th 人気順
       th オッズ
-  - @table_data.each do |pops_calc_result|
-    - pops_calc_result[:win_races].each do |win_race|
+  - @table_data.each do |popcon, result|
+    - result[:win_races].each do |win_race|
       tbody
         tr
           td = win_race.race.date

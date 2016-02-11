@@ -5,7 +5,7 @@ html lang="en"
     meta charset="utf-8" /
     meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible" /
     meta content="width=device-width, initial-scale=1.0" name="viewport" /
-    title= content_for?(:title) ? yield(:title) : "KeibaSimulator"
+    title= content_for?(:title) ? yield(:title) : "競馬オッズシミュレーター"
     = favicon_link_tag
     = csrf_meta_tags
     = stylesheet_link_tag "application", :media => "all"
@@ -35,12 +35,12 @@ html lang="en"
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a.navbar-brand href="/"  KeibaSimulator
+        a.navbar-brand href="/"  競馬オッズシミュレーター
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
-            li= link_to "Try", try_home_path
-            li= link_to "BetCheck", betcheck_path
-            li= link_to "Analyze", analyze_path
+            li= link_to "検証", try_path
+            li= link_to "オッズチェック", betcheck_path
+            li= link_to "分析", analyze_path
     .container
       .row
         .col-lg-12

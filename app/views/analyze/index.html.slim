@@ -1,4 +1,4 @@
-= simple_form_for action, { url: "#{url}" } do |f|
+= simple_form_for :result, { url: "analyze/result" } do |f|
   = f.date_field :date_from, as: :date
   = f.date_field :date_to, as: :date
   = f.input :place,
