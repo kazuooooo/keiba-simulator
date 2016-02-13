@@ -1,10 +1,12 @@
 class BetconditionsController < ApplicationController
   def create
+
     if user_signed_in?
       @betcondition = current_user.betconditions.build(betcondition_params)
     else
       @betcondition = Betcondition.new(betcondition_params)
     end
+
     mode = @betcondition.mode
     if mode == "try"
       respond_to do |format|
@@ -23,6 +25,7 @@ class BetconditionsController < ApplicationController
         end
       end
     end
+
   end
 
   def destroy
