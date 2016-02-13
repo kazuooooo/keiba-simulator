@@ -18,7 +18,7 @@ module KeibaScraping
   class Race < Struct.new(:date, :place, :race_num); end
   # horce 着順、枠番、馬番、人気、オッズ
   class Horce < Struct.new(:ranking, :frame_num, :horce_num, :horce_name, :popularity, :odds); end
-  for year in 2005..2015
+  year = 1996
     csv_file = "#{year}.csv"
     # CSVヘッダー記載
     CSV.open(csv_file,"w") do |csv|
@@ -124,5 +124,4 @@ module KeibaScraping
           end
       end
     end
-  end
 end

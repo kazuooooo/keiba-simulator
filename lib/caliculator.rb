@@ -61,10 +61,11 @@ module Caliculator
 
     lose_race_count = race_count - win_races.size
     return {
-      :money => money,
-      :win_races => win_races,
-      :win_race_count => win_races.size,
-      :lose_race_count => lose_race_count
+      :money           => money,
+      :win_races       => win_races,
+      :win_race_count  => win_races.size,
+      :lose_race_count => lose_race_count,
+      :race_count      => win_races.size + lose_race_count,
     }
   end
 end

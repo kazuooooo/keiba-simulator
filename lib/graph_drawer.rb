@@ -4,16 +4,20 @@ module GraphDrawer
     con_results_hash.each do |con, results|
       x_axis_vals = []
       y_result_vals = []
+      race_conunts = []
       results.each do |odds, odds_result|
-        x_axis_vals << odds
+        x_axis_vals   << odds
         y_result_vals << odds_result.fetch(:money)
+        race_conunts  << odds_result.fetch(:race_count)
       end
 
       @graphs << LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: "#{@date_from} - #{@date_to} #{@place}競馬場
                        #{con.popularity}番人気
                        ボーダーオッズ#{con.border_start}〜#{con.border_end}")
+        f.options[:yAxis] = [{ title: { text: '金額' }}, { title: { text: 'ベット数'}, opposite: true}]
         f.xAxis(categories: x_axis_vals)
+        f.series(name: 'ベット数', data: race_conunts, type: 'column', yAxis: 1)
         f.series(name: '結果(円)', data: y_result_vals)
       end
     end
