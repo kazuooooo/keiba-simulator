@@ -23,9 +23,13 @@ class Betcondition < ActiveRecord::Base
 
   def meet_condition?(pop_rank, odds)
     # 対象の人気順のpop_conditionを配列で抽出(同じ人気順に複数指定できるように)
-    pop_conditions = self.popconditions.select{|popcondition| popcondition.popularity == pop_rank}
+    target_pop_conditions = popconditions.select{|popcondition| popcondition.popularity == pop_rank}
+    # pop_rankがpopconditions内にない場合はreturn
+    if target_pop_conditions.empty?
+      return false
+    end
     # 抽出したpopconditionにoddsが条件を満たしているか検証
-    popconditions.each do |popcondition|
+    target_pop_conditions.each do |popcondition|
       @result = popcondition.meet_condition?(odds)
       if @result
         break

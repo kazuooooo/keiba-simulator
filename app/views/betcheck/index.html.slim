@@ -3,13 +3,15 @@
     ul
       li.heading
         = betcondition.name
+      li
+        = betcondition.place.name
         - betcondition.popconditions.each do |popcondition|
           li
             = "#{popcondition.popularity}番人気\(#{popcondition.odds_start}~#{popcondition.odds_end}\)"
       li
         = betcondition.id
       li.action
-        = link_to '更新', {action: :color_targets, bc_id: betcondition.id}, remote: true, :method => :post
+        = link_to 'この条件で絞る', {action: :color_targets, bc_id: betcondition.id}, remote: true, :method => :post
 ul.nav.nav-tabs role="tablist"
   li.active role="presentation"
     a aria-controls="nakayama" data-toggle="tab" href="#nakayama" role="tab"  中山

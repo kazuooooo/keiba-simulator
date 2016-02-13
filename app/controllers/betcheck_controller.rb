@@ -15,12 +15,14 @@ class BetcheckController < ApplicationController
   end
 
   def set_bet_conditions
-    @bet_conditions = Betcondition.all.includes(:popconditions)
+    if user_signed_in?
+      @bet_conditions = current_user.betconditions.includes(:popconditions).includes(:place)
+    end
   end
 
   def set_selected_bet_conodition
     @bet_condition = Betcondition.find(params[:bc_id])
-    @place         = "京都"
+    @place         = @bet_condition.place.name
   end
 
 end
