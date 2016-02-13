@@ -1,11 +1,4 @@
-<!-- UGLYHACK ただjsとRubyの混在で直すのはかなり大変そう -->
-$('#kyoto').html(
-  "<%= render partial: 'shared/colored_odds_table',locals: { odds_data: @odds_data, place: "京都"} %>"
-);
-$('#tokyo').html(
-  "<%= render partial: 'shared/colored_odds_table',locals: { odds_data: @odds_data, place: "東京"} %>"
-);
-$('#ogura').html(
-  "<%= render partial: 'shared/colored_odds_table',locals: { odds_data: @odds_data, place: "小倉"} %>"
+$("<%= get_place_html_id(@place) %>").html(
+  "<%= render partial: 'shared/colored_odds_table',locals: { odds_data: @odds_data, place: @place} %>"
 );
 
