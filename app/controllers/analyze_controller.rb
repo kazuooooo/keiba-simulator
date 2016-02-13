@@ -4,6 +4,8 @@ class AnalyzeController < ApplicationController
   before_action :set_post_values, only: [:result]
 
   def index
+    @bet_condition = Betcondition.new
+    @mode          = "analyze"
   end
 
   def result
@@ -24,22 +26,30 @@ class AnalyzeController < ApplicationController
 
 
   def set_post_values
-    @date_from = Date.parse(params["result"]["date_from"])
-    @date_to   = Date.parse(params["result"]["date_to"])
-    @place     = params["result"][:place]
+    betcondition = Betcondition.last
+    @date_from = betcondition.start_date
+    @date_to   = betcondition.end_date
+    @place     = betcondition.place.name
 
     # 人気順をあるだけ取得
     @pops_cons = []
-    for num in 1..18 do
-      unless params["result"]['border_start' << num.to_s].nil? then
-        @pops_cons << PopularityCondition.new(
-                       num.to_s,
-                       params["result"]['border_start' << num.to_s].to_f,
-                       params["result"]['border_end' << num.to_s].to_f
-                     )
-      end
+    betcondition.popconditions.each do |popcondition|
+      @pops_cons << PopularityCondition.new(
+                      popcondition.popularity,
+                      popcondition.odds_start,
+                      popcondition.odds_end
+                    )
     end
+    # for num in 1..18 do
+    #   unless params["result"]['border_start' << num.to_s].nil? then
+    #     @pops_cons << PopularityCondition.new(
+    #                    num.to_s,
+    #                    params["result"]['border_start' << num.to_s].to_f,
+    #                    params["result"]['border_end' << num.to_s].to_f
+    #                  )
+    #   end
+    # end
     # 未入力のものは削除
-    @pops_cons.reject!{|p| p.border_start == 0.0 && p.border_end == 0.0}
+    # @pops_cons.reject!{|p| p.border_start == 0.0 && p.border_end == 0.0}
   end
 end

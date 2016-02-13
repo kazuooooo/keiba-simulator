@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post '/betcheck/color_targets'
   # analyze
   get '/analyze'   => 'analyze#index'
-  post '/analyze/result' => 'analyze#result'
+  get '/analyze/result' => 'analyze#result'
 
   get '/ajax' => 'ajax#index'
   get '/ajax/upanel' => 'ajax#upanel'

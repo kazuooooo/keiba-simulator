@@ -5,6 +5,7 @@ class TryController < ApplicationController
   PopularityCondition = Struct.new(:popularity, :border_start, :border_end)
   def new
     @bet_condition = Betcondition.new
+    @mode          = "try"
   end
 
   def result
@@ -21,6 +22,7 @@ class TryController < ApplicationController
   end
 
   def set_betcondition
+    # TODO: 複数人で同時にやるとこれはまずい
     @betcondition = Betcondition.last
   end
 
