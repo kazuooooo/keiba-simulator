@@ -5,8 +5,8 @@ namespace :csv_data do
   desc "import csv data to DB"
   task :import, 'file_name'
   task :import => :environment do |task, args|
-    clear_data()
-    create_place_table()
+    # clear_data()
+    # create_place_table()
     import_csv_data(args['file_name'])
   end
 end
@@ -15,7 +15,7 @@ def clear_data
   Race.delete_all
   Horceresult.delete_all
   Horce.delete_all
-  Place.delete_all
+  # Place.delete_all
 end
 
 def create_place_table
@@ -54,7 +54,7 @@ def import_csv_data(file_name)
     ### Placeを使ってRaceをビルド
     place = Place.find_by(:name => row['場所'])
     ### 日付をDateオブジェクトに変換
-    date_str = row['日付'].slice(/2.*日/)
+    date_str = row['日付'].slice(/[1|2].*日/)
     date_obj = Date.strptime(date_str,"%Y年 %m月 %d日")
     ### raceモデルを作成
     if (prior_row.nil?) || (row['R'] != prior_row['R'])

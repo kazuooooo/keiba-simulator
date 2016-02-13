@@ -16,11 +16,12 @@ ul.nav.nav-tabs role="tablist"
   li role="presentation"
     a aria-controls="kyoto" data-toggle="tab" href="#kyoto" role="tab"  京都
   li role="presentation"
-    a aria-controls="messages" data-toggle="tab" href="#chukyo" role="tab"  中京
+    a aria-controls="chukyo" data-toggle="tab" href="#chukyo" role="tab"  中京
   li role="presentation"
-    a aria-controls="settings" data-toggle="tab" href="#tokyo" role="tab"  東京
+    a aria-controls="tokyo" data-toggle="tab" href="#tokyo" role="tab"  東京
+  li role="presentation"
+    a aria-controls="ogura" data-toggle="tab" href="#ogura" role="tab"  小倉
 .tab-content
-/ TODO:Refactoring
   #nakayama.tab-pane.active role="tabpanel"
     - place = "中山"
     - if @odds_data
@@ -41,6 +42,11 @@ ul.nav.nav-tabs role="tablist"
   #tokyo.tab-pane role="tabpanel"
     - if @odds_data
       = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "東京" }
+    - else
+      p 今日はレースがないよ
+  #ogura.tab-pane role="tabpanel"
+    - if @odds_data
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "小倉" }
     - else
       p 今日はレースがないよ
 div
