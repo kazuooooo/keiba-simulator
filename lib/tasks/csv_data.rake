@@ -3,11 +3,13 @@ require 'date'
 
 namespace :csv_data do
   desc "import csv data to DB"
-  task :import, 'file_name'
+  #tmp task :import, 'file_name'
   task :import => :environment do |task, args|
     # clear_data()
     # create_place_table()
-    import_csv_data(args['file_name'])
+    for num in 1997..2011 do
+      import_csv_data(num.to_s)
+    end
   end
 end
 
@@ -42,7 +44,7 @@ def create_place_table
 end
 
 def import_csv_data(file_name)
-
+  puts "start" << file_name
   prior_row = nil
   race = nil
 
@@ -77,4 +79,6 @@ def import_csv_data(file_name)
     ### 1つ前の行を保存
     prior_row = row
   end
+
+  puts "end" << file_name
 end
