@@ -1,4 +1,4 @@
-= nested_form_for(bet_condition) do |f|
+= nested_form_for bet_condition do |f|
   .form
     .input-group
       = f.label "名前", :class => "input-group-addon"
@@ -27,9 +27,3 @@
             = f_pop_condition.link_to_remove "削除",  :class => "btn btn-danger"
       = f.link_to_add "条件を追加する", :popconditions,  :class => "btn btn-primary"
       = f.submit "検証する", :class => "btn btn-info"
-
-javascript:
-  $(document).ready(function(){
-    $('.datepicker').datepicker();
-  });
-</script>

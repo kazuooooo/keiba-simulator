@@ -2,6 +2,8 @@ class Betcondition < ActiveRecord::Base
   belongs_to :place
   belongs_to :user
   has_many :popconditions
+  serialize :try_result_cache, Hash
+  serialize :analyze_result_cache, Hash
   accepts_nested_attributes_for :popconditions, allow_destroy: true
   # validations
   validates :name,

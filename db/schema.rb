@@ -11,17 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160213143926) do
+ActiveRecord::Schema.define(version: 20160220025420) do
 
   create_table "betconditions", force: :cascade do |t|
-    t.integer  "place_id",   limit: 4
+    t.integer  "place_id",             limit: 4
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.string   "name",       limit: 255
-    t.integer  "user_id",    limit: 4
-    t.string   "mode",       limit: 255
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "name",                 limit: 255
+    t.integer  "user_id",              limit: 4
+    t.string   "mode",                 limit: 255
+    t.text     "analyze_result_cache", limit: 65535
+    t.text     "try_result_cache",     limit: 65535
   end
 
   create_table "horceresults", force: :cascade do |t|
