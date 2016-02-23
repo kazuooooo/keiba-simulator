@@ -56,4 +56,15 @@ ActiveAdmin.register User do
     end
   end
 
+  # デフォルトのアクションに新たにアクションを追加する(actionsでボタンとかができる)
+  action_item :c_test_action, only: :show do
+    link_to 'View on site', c_test_action_admin_users_path
+  end
+
+  # リソースに対するアクションを定義する
+  collection_action :c_test_action, method: :get do
+    # Do some CSV importing work here...
+    redirect_to collection_path, notice: "CSV imported successfully!"
+  end
+
 end
