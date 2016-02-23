@@ -1,0 +1,6 @@
+- case @mode
+- when "try"
+  h2 検証モードは指定した条件で馬券を購入検証できます。
+- when "analyze"
+  h2 分析モードは指定した範囲を全て購入します。
+= render partial: "shared/betcondition_form", locals: { bet_condition: @bet_condition, mode: @mode }

@@ -1,25 +1,25 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'home#index'
-  # try
-  get '/try'  => 'try#new'
-  get '/try/result' => 'try#result'
+  # betcheck
   get '/betcheck' => 'betcheck#index'
   post '/betcheck/color_targets'
-  # analyze
-  get '/analyze'   => 'analyze#index'
-  post '/analyze/result' => 'analyze#result'
 
   get '/ajax' => 'ajax#index'
   get '/ajax/upanel' => 'ajax#upanel'
   # Example of regular route:
-
-  post '/try_result' => 'result#try_result'
-  resources :betconditions
+  resources :betconditions do
+    member do
+      get :try_result
+      get :analyze_result
+    end
+  end
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

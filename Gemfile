@@ -43,6 +43,7 @@ gem 'jc-validates_timeliness'
 gem 'bootstrap-select-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'devise'
+gem 'activeadmin', '~> 1.0.0.pre2'
 
 # for making graph
 gem "lazy_high_charts"
