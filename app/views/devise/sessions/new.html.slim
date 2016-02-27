@@ -6,5 +6,7 @@ h2
     = f.input :password, required: false
     = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
   .form-actions
-    = f.button :submit, "Log in"
+    = f.button :submit, "ログイン"
+.guest-link
+  = link_to "ゲストとして利用", root_path
 = render "devise/shared/links"
