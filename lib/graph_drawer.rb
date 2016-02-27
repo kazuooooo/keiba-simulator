@@ -2,13 +2,15 @@ module GraphDrawer
   def draw_analyze_graph(con_results_hash)
     @graphs = []
     con_results_hash.each do |con, results|
-      x_axis_vals = []
-      y_result_vals = []
-      race_conunts = []
+      x_axis_vals     = []
+      y_result_vals   = []
+      race_conunts    = []
+      win_race_counts = []
       results.each do |odds, odds_result|
         x_axis_vals   << odds
         y_result_vals << odds_result.fetch(:money)
         race_conunts  << odds_result.fetch(:race_count)
+        win_race_counts    << odds_result.fetch(:win_race_count)
       end
 
       @graphs << LazyHighCharts::HighChart.new('graph') do |f|
@@ -17,7 +19,8 @@ module GraphDrawer
                        ボーダーオッズ#{con.border_start}〜#{con.border_end}")
         f.options[:yAxis] = [{ title: { text: '金額' }}, { title: { text: 'ベット数'}, opposite: true}]
         f.xAxis(categories: x_axis_vals)
-        f.series(name: 'ベット数', data: race_conunts, type: 'column', yAxis: 1)
+        f.series(name: 'ベット数', data: race_conunts, type: 'column', yAxis: 1, point_placement: 0)
+        f.series(name: '勝利数', data: win_race_counts, type: 'column', yAxis: 1, point_placement: 0)
         f.series(name: '結果(円)', data: y_result_vals)
       end
     end
