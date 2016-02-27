@@ -46,7 +46,6 @@ class BetconditionsController < ApplicationController
 
   def try_result
     bet_condition = Betcondition.find(params[:id])
-    binding.pry
     # result 各popconditionの合計値
     # {popcon1 => result_hash1, popcon2 => result_hash2....}
     try_result_hash = calc_try(bet_condition)
