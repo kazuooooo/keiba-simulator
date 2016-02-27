@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require bootstrap-datepicker3
+ *= require bootstrap-material-design
  */
 [class^="result_popularity"],
 [class*=" result_popularity"] {
