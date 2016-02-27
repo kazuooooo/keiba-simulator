@@ -9,4 +9,5 @@ module ApplicationHelper
   def header_user_name
     user_signed_in? ? current_user.email : "ゲスト"
   end
+
 end
