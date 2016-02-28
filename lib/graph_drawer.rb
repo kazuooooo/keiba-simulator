@@ -36,7 +36,7 @@ module GraphDrawer
     race_count_total = 0
 
     try_results_hash.each do |con, result|
-      xAxis_categories << con.popularity
+      xAxis_categories << con.popularity.to_s + "番人気"
       money_data       << result[:money]
       win_count_data   << result[:win_race_count]
       race_count_data  << (result[:win_race_count] + result[:lose_race_count])
@@ -45,7 +45,7 @@ module GraphDrawer
       race_count_total += (result[:win_race_count] + result[:lose_race_count])
     end
 
-    xAxis_categories << 'total'
+    xAxis_categories << '合計'
     money_data       << money_data_total
     win_count_data   << win_count_total
     race_count_data  << race_count_total
