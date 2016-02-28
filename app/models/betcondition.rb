@@ -6,21 +6,23 @@ class Betcondition < ActiveRecord::Base
   serialize :analyze_result_cache, Hash
   accepts_nested_attributes_for :popconditions, allow_destroy: true
   # validations
-  validates :name,
-    presence: true
+  # validates :name,
+  #   presence: true
   validates :place_id,
     presence: true
   validates :start_date,
     presence: true,
     timeliness: {
+                  after: Date.new(2012, 12, 31),
                   before: :end_date,
                 }
   validates :end_date,
     presence: true,
     timeliness: {
-                  after: :start_date,
-                  before: Date.today
+                  before: Date.new(2016, 01, 01)
                 }
+  validates :popconditions,
+    presence: true
 
 
   def meet_condition?(pop_rank, odds)

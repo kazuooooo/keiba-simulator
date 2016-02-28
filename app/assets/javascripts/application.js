@@ -21,3 +21,4 @@
 //= require jquery_nested_form
 //= require bootstrap-select
 //= require bootstrap-datepicker
+//= require bootstrap-material-design

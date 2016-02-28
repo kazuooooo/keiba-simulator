@@ -52,6 +52,8 @@ GEM
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
+    autoprefixer-rails (6.3.3.1)
+      execjs
     awesome_print (1.6.1)
     bcrypt (3.1.10)
     better_errors (2.1.1)
@@ -62,6 +64,11 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.5.0)
       railties (>= 3.0)
+    bootstrap-material-design (0.2.2)
+      bootstrap-sass (~> 3.0)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     bootstrap-select-rails (1.6.3)
     bourbon (4.2.6)
       sass (~> 3.4)
@@ -367,6 +374,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-datepicker-rails
+  bootstrap-material-design
   bootstrap-select-rails
   bullet
   byebug

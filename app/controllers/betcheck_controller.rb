@@ -25,4 +25,8 @@ class BetcheckController < ApplicationController
     @place         = @bet_condition.place.name
   end
 
+  def has_race?(place)
+    @odds_data.has_key?(place)
+  end
+  helper_method :has_race?
 end

@@ -5,9 +5,9 @@ namespace :csv_data do
   desc "import csv data to DB"
   #tmp task :import, 'file_name'
   task :import => :environment do |task, args|
-    # clear_data()
+    clear_data()
     # create_place_table()
-    for num in 1997..2011 do
+    for num in [2013] do
       import_csv_data(num.to_s)
     end
   end
@@ -60,22 +60,23 @@ def import_csv_data(file_name)
     date_obj = Date.strptime(date_str,"%Y年 %m月 %d日")
     ### raceモデルを作成
     if (prior_row.nil?) || (row['R'] != prior_row['R'])
-      race = place.races.build(:date => date_obj, :race_num => row['R'])
+      race = place.races.build(:date => date_obj, :race_num => row['R'], :race_name => row['レース名'])
       place.save
     end
+
+    ### DBになければHorceモデルを作成
+    horce = Horce.find_by(:name => row['馬名']) || Horce.create!(:name => row['馬名'])
+
     ### horceresultモデルを作成
     race.horceresults.build(
       :odds => row['オッズ'],
       :popularity => row['人気順'],
       :horce_num => row['馬番'],
       :frame_num => row['枠番'],
-      :ranking => row['着順']
+      :ranking => row['着順'],
+      :horce_id => horce.id
     )
     race.save
-    ### DBになければHorceモデルを作成
-    if Horce.find_by(:name => row['馬名']).nil?
-      Horce.create!(:name => row['馬名'])
-    end
     ### 1つ前の行を保存
     prior_row = row
   end

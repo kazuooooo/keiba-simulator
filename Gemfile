@@ -42,6 +42,7 @@ gem 'nested_form'
 gem 'jc-validates_timeliness'
 gem 'bootstrap-select-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'bootstrap-material-design'
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre2'
 

@@ -1,58 +1,73 @@
+h3 オッズをタイムリーにチェックできます(※レースがある日しか表示されません。)
 #pricing-table.pricing-table
-  - @bet_conditions.each do |betcondition|
-    ul
-      li.heading
-        = betcondition.name
-      li
-        = betcondition.place.name
-        - betcondition.popconditions.each do |popcondition|
-          li
-            = "#{popcondition.popularity}番人気\(#{popcondition.odds_start}~#{popcondition.odds_end}\)"
-      li
-        = betcondition.id
-      li.action
-        = link_to 'この条件で絞る', {action: :color_targets, bc_id: betcondition.id}, remote: true, :method => :post
+  - if user_signed_in?
+    - @bet_conditions.each do |betcondition|
+      ul
+        li.heading
+          = betcondition.name
+        li
+          = betcondition.place.name
+          - betcondition.popconditions.each do |popcondition|
+            li
+              = "#{popcondition.popularity}番人気\(#{popcondition.odds_start}~#{popcondition.odds_end}\)"
+        li
+          = betcondition.id
+        li.action
+          = link_to 'この条件で絞る', {action: :color_targets, bc_id: betcondition.id}, remote: true, :method => :post
 ul.nav.nav-tabs role="tablist"
+  li role="presentation"
+    - if has_race?("札幌")
+      a aria-controls="sapporo" data-toggle="tab" href="#sapporo" role="tab" 札幌
+  li role="presentation"
+    - if has_race?("函館")
+      a aria-controls="hakodate" data-toggle="tab" href="#hakodate" role="tab" 函館
+  li role="presentation"
+    - if has_race?("福島")
+      a aria-controls="fukushima" data-toggle="tab" href="#fukushima" role="tab" 福島
+  li role="presentation"
+    - if has_race?("新潟")
+      a aria-controls="nigata" data-toggle="tab" href="#nigata" role="tab" 新潟
+  li role="presentation"
+    - if has_race?("東京")
+      a aria-controls="tokyo" data-toggle="tab" href="#tokyo" role="tab" 東京
   li.active role="presentation"
-    a aria-controls="nakayama" data-toggle="tab" href="#nakayama" role="tab"  中山
+    - if has_race?("中山")
+      a aria-controls="nakayama" data-toggle="tab" href="#nakayama" role="tab" 中山
   li role="presentation"
-    a aria-controls="kyoto" data-toggle="tab" href="#kyoto" role="tab"  京都
+    - if has_race?("中京")
+      a aria-controls="chukyo" data-toggle="tab" href="#chukyo" role="tab" 中京
   li role="presentation"
-    a aria-controls="chukyo" data-toggle="tab" href="#chukyo" role="tab"  中京
+    - if has_race?("京都")
+      a aria-controls="kyoto" data-toggle="tab" href="#kyoto" role="tab" 京都
   li role="presentation"
-    a aria-controls="tokyo" data-toggle="tab" href="#tokyo" role="tab"  東京
+    - if has_race?("阪神")
+      a aria-controls="hanshin" data-toggle="tab" href="#ogura" role="tab" 阪神
   li role="presentation"
-    a aria-controls="ogura" data-toggle="tab" href="#ogura" role="tab"  小倉
+    - if has_race?("小倉")
+      a aria-controls="ogura" data-toggle="tab" href="#ogura" role="tab" 小倉
 .tab-content
-  #nakayama.tab-pane.active role="tabpanel"
-    - place = "中山"
-    - if @odds_data
-      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中山" }
-    - else
-      p 今日はレースがないよ
-  #kyoto.tab-pane role="tabpanel"
-    - place = "京都"
-    - if @odds_data
-      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "京都" }
-    - else
-      p 今日はレースがないよ
-  #chukyo.tab-pane role="tabpanel"
-    - if @odds_data
-      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中京" }
-    - else
-      p 今日はレースがないよ
+  #sapporo.tab-pane role="tabpanel"
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "札幌" }
+  #hakodate.tab-pane role="tabpanel"
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "函館" }
+  #fukushima.tab-pane role="tabpanel"
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "福島" }
+  #nigata.tab-pane role="tabpanel"
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "新潟" }
   #tokyo.tab-pane role="tabpanel"
-    - if @odds_data
       = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "東京" }
-    - else
-      p 今日はレースがないよ
+  #nakayama.tab-pane.active role="tabpanel"
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中山" }
+  #chukyo.tab-pane role="tabpanel"
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "中京" }
+  #kyoto.tab-pane role="tabpanel"
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "京都" }
+  #hanshin.tab-pane role="tabpanel"
+      = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "阪神" }
   #ogura.tab-pane role="tabpanel"
-    - if @odds_data
       = render partial: "shared/odds_table", locals: { odds_data: @odds_data, place: "小倉" }
-    - else
-      p 今日はレースがないよ
-div
-  | 現在時刻：#{Time.now}
-#result
-  | 現在時刻：#{Time.now}
-= link_to '更新', {action: :color_targets}, remote: true
+/ div
+/   | 現在時刻：#{Time.now}
+/ #result
+/   | 現在時刻：#{Time.now}
+/ = link_to '更新', {action: :color_targets}, remote: true

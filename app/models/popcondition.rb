@@ -6,10 +6,10 @@ class Popcondition < ActiveRecord::Base
     presence: true
   validates :odds_start,
     presence: true,
-    numericality: {greater_than_or_equal_to: 0}
+    numericality: {greater_than_or_equal_to: 0, allow_blank: true}
   validates :odds_end,
     presence: true,
-    numericality: {greater_than: :odds_start}
+    numericality: {greater_than: :odds_start, allow_blank: true}
 
   def meet_condition?(odds)
     odds.between?(self.odds_start, self.odds_end)

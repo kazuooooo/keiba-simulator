@@ -1,6 +1,8 @@
 ---
 ja:
   activerecord:
+    attributes:
+      start_date: "開始日"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
