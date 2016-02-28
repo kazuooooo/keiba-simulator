@@ -14,9 +14,9 @@ module GraphDrawer
       end
 
       @graphs << LazyHighCharts::HighChart.new('graph') do |f|
-        f.title(text: "#{@date_from} - #{@date_to} #{@place}競馬場
-                       #{con.popularity}番人気
-                       ボーダーオッズ#{con.border_start}〜#{con.border_end}")
+        f.title(text: "#{@date_from} 〜 #{@date_to} #{@place}競馬場 /
+                       #{con.popularity}番人気 /
+                       オッズ#{con.border_start.to_f}〜#{con.border_end.to_f}")
         f.options[:yAxis] = [{ title: { text: '金額' }}, { title: { text: 'ベット数'}, opposite: true}]
         f.xAxis(categories: x_axis_vals)
         f.series(name: 'ベット数', data: race_conunts, type: 'column', yAxis: 1)

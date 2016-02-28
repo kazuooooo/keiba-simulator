@@ -1,9 +1,11 @@
 = high_chart("chart-1", @graph_data)
+h3 勝利レース一覧
 table.table.table-striped.table-bordered.table-hover
   thead
     tr
       th 日付
       th レース番号
+      th 馬名
       th 人気順
       th オッズ
   - @table_data.each do |popcon, result|
@@ -13,5 +15,5 @@ table.table.table-striped.table-bordered.table-hover
           td = win_race.race.date
           td = win_race.race.race_num
           td = win_race.horce_result.popularity
+          td = win_race.horce_result.popularity
           td = win_race.horce_result.odds
-= debug(@graph_data)

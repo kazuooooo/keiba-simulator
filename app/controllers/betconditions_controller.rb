@@ -10,28 +10,25 @@ class BetconditionsController < ApplicationController
   end
 
   def create
-
     if user_signed_in?
       @betcondition = current_user.betconditions.build(betcondition_params)
     else
       @betcondition = Betcondition.new(betcondition_params)
     end
-
-    mode = @betcondition.mode
-    if mode == "try"
+    if params[:mode] == "try"
       respond_to do |format|
         if @betcondition.save
-          format.html { redirect_to try_result_betcondition_path(@betcondition), notice: 'betcondition was successfully created.' }
+          format.html { redirect_to try_result_betcondition_path(@betcondition), notice: '計算が完了しました。' }
         else
-          format.html { redirect_to new_betcondition_path(:mode => "try"), notice: @betcondition.errors }
+          format.html { redirect_to new_betcondition_path(:mode => "try"), notice: @betcondition.errors.full_messages }
         end
       end
-    elsif mode == "analyze"
+    elsif params[:mode] == "analyze"
       respond_to do |format|
         if @betcondition.save
-          format.html { redirect_to analyze_result_betcondition_path(@betcondition), notice: 'betcondition was successfully created.' }
+          format.html { redirect_to analyze_result_betcondition_path(@betcondition), notice: '計算が完了しました。' }
         else
-          format.html { redirect_to new_betcondition_path(:mode => "analyze"), notice: @betcondition.errors }
+          format.html { redirect_to new_betcondition_path(:mode => "analyze"), notice: @betcondition.errors.full_messages }
         end
       end
     end

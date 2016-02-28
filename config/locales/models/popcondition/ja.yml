@@ -1,0 +1,7 @@
+ja:
+  activerecord:
+    attributes:
+      popconditions:
+        popularity: "人気順"
+        odds_start: "開始オッズ"
+        odds_end: "終了オッズ"

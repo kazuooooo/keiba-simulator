@@ -1,29 +1,31 @@
 = nested_form_for bet_condition do |f|
-  .form
-    .input-group
-      = f.label "名前", :class => "input-group-addon"
-      = f.hidden_field :mode, :value => mode
-      = f.text_field   :name, :class => "form-control", :value => "TEST"
+  .form-container
+    = hidden_field_tag(:mode, mode)
+    / .input-group
+    /   = f.label "名前", :class => "input-group-addon"
+    /   = f.hidden_field :mode, :value => mode
+    /   = f.text_field   :name, :class => "form-control", :place
     .place
-      = f.label "場所", :class => "input-group-addon"
-      = f.collection_select(:place_id, Place.all, :id, :name,:class => "selectpicker")
+      = f.label "競馬場", :class => "input-group-addon"
+      = f.collection_select(:place_id, Place.all, :id, :name)
     .date
       = f.label "開始日", :class => "input-group-addon"
-      = f.date_field   :start_date, :class => "form-control", :value => Date.new(2015, 01, 01)
+      = f.date_field   :start_date, :class => "form-control", :value => Date.new(1993, 01, 01)
+    .date
       = f.label "終了日", :class => "input-group-addon"
-      = f.date_field   :end_date, :class => "form-control", :value => Date.new(2015, 12, 31)
-    .pop_condition
-      = f.fields_for :popconditions do |f_pop_condition|
-        .form-group
-          .popularity
-            = f.label "人気順", :class => "label label-default odds-label"
-            = f_pop_condition.number_field :popularity
-          .odds_start
-            = f.label "オッズスタート", :class => "label label-default odds-label"
-            = f_pop_condition.number_field :odds_start
-          .odds_end
-            = f.label "オッズエンド", :class => "label label-default odds-label"
-            = f_pop_condition.number_field :odds_end
-            = f_pop_condition.link_to_remove "削除",  :class => "btn btn-danger"
-      = f.link_to_add "条件を追加する", :popconditions,  :class => "btn btn-primary"
-      = f.submit "検証する", :class => "btn btn-info"
+      = f.date_field   :end_date, :class => "form-control", :value => Date.new(1994, 12, 31)
+  .pop_condition
+    = f.fields_for :popconditions do |f_pop_condition|
+      .form-group
+        .popularity
+          = f.label "人気順", :class => "label label-default odds-label"
+          = f_pop_condition.number_field :popularity
+        .odds_start
+          = f.label "オッズスタート", :class => "label label-default odds-label"
+          = f_pop_condition.number_field :odds_start
+        .odds_end
+          = f.label "オッズエンド", :class => "label label-default odds-label"
+          = f_pop_condition.number_field :odds_end
+          = f_pop_condition.link_to_remove "削除",  :class => "btn btn-danger"
+    = f.link_to_add "条件を追加する", :popconditions,  :class => "btn btn-primary"
+    = f.submit "検証する", :class => "btn btn-info"
