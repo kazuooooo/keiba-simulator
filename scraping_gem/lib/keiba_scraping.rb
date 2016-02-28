@@ -86,6 +86,10 @@ module KeibaScraping
                 title_text_array = title_text.gsub(" ","").split("|")
                 # 日付
                 date = title_text_array[0]
+                # ちょいちょいここで落ちる(ただうまくいくときといかないときがあるからレスポンスがおかしい可能性が高い)
+                # if title_text_array[1].nil?
+                #   binding.pry
+                # end
                 # 場所
                 place = title_text_array[1][2,2]
                 # 第何Rか

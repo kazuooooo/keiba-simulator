@@ -13,13 +13,13 @@ class Betcondition < ActiveRecord::Base
   validates :start_date,
     presence: true,
     timeliness: {
+                  after: Date.new(2012, 12, 31),
                   before: :end_date,
                 }
   validates :end_date,
     presence: true,
     timeliness: {
-                  after: :start_date,
-                  before: Date.today
+                  before: Date.new(2016, 01, 01)
                 }
   validates :popconditions,
     presence: true
