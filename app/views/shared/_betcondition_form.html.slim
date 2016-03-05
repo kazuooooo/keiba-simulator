@@ -30,4 +30,5 @@ h5
           = f_pop_condition.number_field :odds_end
           = f_pop_condition.link_to_remove "削除",  :class => "btn btn-danger"
     = f.link_to_add "条件を追加する", :popconditions,  :class => "btn btn-primary"
-    = f.submit "検証する", :class => "btn btn-info"
+    = f.submit "検証する", class: "btn btn-info", data: { disable_with: "計算中..." }
+    p ※ データ量によって計算に時間がかかる場合があります。気長にお待ち下さい。
