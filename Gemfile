@@ -74,5 +74,8 @@ group :development do
   gem 'tapp'
   gem 'capistrano'
   gem 'capistrano-rails'
+  gem 'capistrano-ext'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
