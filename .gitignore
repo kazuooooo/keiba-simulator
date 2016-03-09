@@ -39,4 +39,5 @@ bower.json
 csv_data/
 scraping_gem/lib/vcr/
 scraping_gem/lib/*.csv
-
+.idea/
+launcher0
