@@ -27,7 +27,7 @@ production:
   reconnect: false
   database: keiba_simulator_production
   pool: 5
-  username: root
-  password:
+  username: keiba_production
+  password: kinakokinako
   host: localhost
 

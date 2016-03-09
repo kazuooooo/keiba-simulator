@@ -26,10 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'bcrypt', '~> 3.1.7'
 gem 'execjs'
 # Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'unicorn'
 
 gem 'slim'
 gem 'simple_form'
@@ -75,5 +72,10 @@ group :development do
   gem 'hirb-unicode'
   gem 'awesome_print'
   gem 'tapp'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-ext'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
