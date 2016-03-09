@@ -27,7 +27,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'execjs'
 # Use Unicorn as the app server
 gem 'unicorn'
-
+gem 'sprockets-rails', '2.3.3'
 gem 'slim'
 gem 'simple_form'
 gem 'therubyracer'
