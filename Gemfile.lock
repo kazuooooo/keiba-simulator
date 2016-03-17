@@ -96,6 +96,7 @@ GEM
     capistrano3-unicorn (0.2.1)
       capistrano (~> 3.1, >= 3.1.0)
     choice (0.2.0)
+    cocoon (1.2.8)
     coderay (1.1.0)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -216,7 +217,6 @@ GEM
     multipart-post (2.0.0)
     mysql2 (0.4.2)
     nenv (0.2.0)
-    nested_form (0.3.2)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
     net-scp (1.2.1)
@@ -412,6 +412,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv
   capistrano3-unicorn
+  cocoon
   coffee-rails (~> 4.1.0)
   devise
   execjs
@@ -426,7 +427,6 @@ DEPENDENCIES
   less-rails
   mechanize
   mysql2
-  nested_form
   pry
   pry-byebug
   pry-doc

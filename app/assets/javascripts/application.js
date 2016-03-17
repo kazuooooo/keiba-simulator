@@ -18,7 +18,7 @@
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
 //= require highcharts/highstock
-//= require jquery_nested_form
+//= require cocoon
 //= require bootstrap-select
 //= require bootstrap-datepicker
 //= require bootstrap-material-design

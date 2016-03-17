@@ -1,0 +1,11 @@
+.form-group
+  .popularity
+    = f.label "人気順", :class => "label label-default odds-label"
+    = f.number_field :popularity
+  .odds_start
+    = f.label "開始オッズ", :class => "label label-default odds-label"
+    = f.number_field :odds_start
+  .odds_end
+    = f.label "終了オッズ", :class => "label label-default odds-label"
+    = f.number_field :odds_end
+    = link_to_remove_association "削除", f, :class => "btn btn-danger"
