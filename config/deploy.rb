@@ -1,3 +1,12 @@
+# deploy:starting
+# deploy:started
+# deploy:updating
+# deploy:updated
+# deploy:publishing
+# deploy:published
+# deploy:finishing
+# deploy:finished
+
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
@@ -41,7 +50,7 @@ set :rbenv_path, '/opt/rbenv'
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles, :all # default value
-# 後でやるという意味
+# deploy:publicshingの後にdeploy:restartするという意味
 after 'deploy:publishing', 'deploy:restart'
 
 namespace :deploy do
@@ -57,7 +66,7 @@ namespace :deploy do
 
   task :restart do
     # unicorn
-    invoke 'unicorn:restart'
+    invoke 'unicorn:reload'
     # application
     on roles(:app), in: :sequence, wait: 5 do
       execute :mkdir, '-p', release_path.join('tmp')
