@@ -5,6 +5,8 @@ require 'capistrano/setup'
 require 'capistrano/deploy'
 
 require 'capistrano/rbenv'
+set :rbenv_type, :system
+set :rbenv_ruby, '2.2.4'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/rails/assets'

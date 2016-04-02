@@ -3,7 +3,7 @@ lock '3.4.0'
 
 set :application, 'keiba-simulator'
 set :repo_url, 'https://github.com/kazuooooo/keiba-simulator.git'
-
+set :user, 'ubuntu'
 set :deploy_to, '/var/www/keiba-simulator'
 
 # Default value for :scm is :git
@@ -19,17 +19,17 @@ set :log_level, :debug
 set :pty, true
 
 set :ssh_options, {
-  keys: %w(~/.ssh/keiba-odds-simulator.pem),
+  keys: %w(~/.ssh/keiba-2.pem),
   forward_agent: true,
 }
 # Default value for :linked_files is []
-#set :linked_files, fetch(:linked_files, []).push('/home/vagrant/app_root/current/tmp/unicorn.pid')
+# set :linked_files, fetch(:linked_files, []).push('/home/vagrant/app_root/current/tmp/unicorn.pid')
 
 # Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('/var/www/keiba-simulator/current')
+# set :linked_dirs, fetch(:linked_dirs, []).push('/var/www/keiba-simulator/current')
 
 # Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
 set :keep_releases, 5
@@ -98,4 +98,10 @@ namespace :setup do
    end
   end
 
+  desc "scp secret.yml"
+  task :scp_secret_yml do
+    run_locally do
+      execute "sudo scp -i ~/.ssh/keiba-3.pem /Users/matsumotokazuya/desktop/keiba-simulator/config/secret.yml ubuntu@52.193.168.195:/var/www/keiba-simulator/current/config/secret.yml"
+    end
+  end
 end
