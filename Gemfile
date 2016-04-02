@@ -42,6 +42,7 @@ gem 'bootstrap-material-design'
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'cocoon'
+gem 'jquery-turbolinks'
 
 # for making graph
 gem "lazy_high_charts"
