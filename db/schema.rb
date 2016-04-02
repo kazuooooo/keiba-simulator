@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228110546) do
+ActiveRecord::Schema.define(version: 20160402104652) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20160228110546) do
   end
 
   create_table "horceresults", force: :cascade do |t|
+    t.integer  "race_id",    limit: 4
+    t.integer  "horce_id",   limit: 4
     t.float    "odds",       limit: 24
     t.integer  "popularity", limit: 4
     t.integer  "horce_num",  limit: 4
@@ -67,8 +69,6 @@ ActiveRecord::Schema.define(version: 20160228110546) do
     t.integer  "ranking",    limit: 4
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.integer  "race_id",    limit: 4
-    t.integer  "horce_id",   limit: 4
   end
 
   add_index "horceresults", ["popularity"], name: "index_horceresults_on_popularity", using: :btree
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160228110546) do
   end
 
   create_table "places", force: :cascade do |t|
+    t.integer  "place_id",   limit: 4
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -89,9 +90,9 @@ ActiveRecord::Schema.define(version: 20160228110546) do
     t.integer  "popularity",      limit: 4
     t.datetime "created_at",                               null: false
     t.datetime "updated_at",                               null: false
-    t.integer  "betcondition_id", limit: 4
     t.decimal  "odds_start",                precision: 10
     t.decimal  "odds_end",                  precision: 10
+    t.integer  "betcondition_id", limit: 4
   end
 
   create_table "races", force: :cascade do |t|
