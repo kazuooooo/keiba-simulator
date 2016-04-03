@@ -41,7 +41,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-material-design'
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre2'
-gem 'cocoon'
+gem 'cocoon', '1.2.9'
 gem 'jquery-turbolinks'
 
 # for making graph
