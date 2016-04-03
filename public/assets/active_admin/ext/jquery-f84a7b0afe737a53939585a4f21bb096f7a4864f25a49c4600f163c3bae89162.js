@@ -1,0 +1,1 @@
+(function(){$.fn.serializeObject=function(){var t,e,i,n,s;for(n={},s=this.serializeArray(),t=0,e=s.length;e>t;t++)i=s[t],n[i.name]=i.value;return n}}).call(this);

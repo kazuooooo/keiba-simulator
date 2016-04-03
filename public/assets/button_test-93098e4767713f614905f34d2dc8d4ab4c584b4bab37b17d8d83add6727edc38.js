@@ -1,0 +1,1 @@
+console.log("posts.js loaded"),$(document).ready(function(){$(".target_button").on("click",function(n){console.log("link clicked")})});

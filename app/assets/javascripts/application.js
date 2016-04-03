@@ -20,5 +20,3 @@
 //= require bootstrap-select
 //= require bootstrap-datepicker
 //= require bootstrap-material-design
-//= require cocoon
-
