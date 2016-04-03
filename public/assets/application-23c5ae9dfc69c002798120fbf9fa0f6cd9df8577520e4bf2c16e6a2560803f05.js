@@ -24568,7 +24568,7 @@ function(){var a=0,b,c,d;mc.apply(this,arguments);if(this.xAxis&&this.processedY
 xa.prototype.tooltipFormatter=function(a){a=a.replace("{point.change}",(this.change>0?"+":"")+Ia(this.change,n(this.series.tooltipOptions.changeDecimals,2)));return nc.apply(this,[a])};u(Q,{Axis:N,Chart:sa,Color:Ea,Point:xa,Tick:$a,Renderer:Xa,Series:M,SVGElement:Ca,SVGRenderer:ha,arrayMin:Sa,arrayMax:Aa,charts:da,dateFormat:ra,format:Ja,pathAnim:Bb,getOptions:function(){return G},hasBidiBug:Yb,isTouchDevice:db,numberFormat:Ia,seriesTypes:H,setOptions:function(a){G=w(!0,G,a);Lb();return G},addEvent:D,
 removeEvent:S,createElement:Y,discardElement:Ta,css:J,each:q,extend:u,map:va,merge:w,pick:n,splat:ia,extendClass:ca,pInt:y,wrap:R,svg:$,canvas:ga,vml:!$&&!ga,product:"Highstock",version:"1.3.10"})})();
 (function($) {
-
+	debugger
   var cocoon_element_counter = 0;
 
   var create_new_id = function() {
@@ -24584,6 +24584,7 @@ removeEvent:S,createElement:Y,discardElement:Ta,css:J,each:q,extend:u,map:va,mer
   }
 
   $(document).on('click', '.add_fields', function(e) {
+	  debugger
     e.preventDefault();
     var $this                 = $(this),
         assoc                 = $this.data('association'),
