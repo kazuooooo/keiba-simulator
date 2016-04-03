@@ -11,15 +11,14 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
 //= require highcharts/highcharts
 //= require highcharts/highcharts-more
 //= require highcharts/highstock
-//= require cocoon
 //= require bootstrap-select
 //= require bootstrap-datepicker
 //= require bootstrap-material-design
-//= require turbolinks
+//= require cocoon
+
