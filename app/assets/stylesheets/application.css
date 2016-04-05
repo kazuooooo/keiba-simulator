@@ -90,3 +90,27 @@
  bottom: 0px;
  right: 10px;
 }
+.explain-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    line-height: 32px;
+    border-radius: 2px;
+    font-size: 0.9em;;
+    background-color: #4285f4;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.explain-text {
+    margin: 15px;
+    font-size: 16px;
+}
+.for-sp {
+    display: none;
+}
+@media all and (max-width: 500px) {
+    .for-pc {
+        display: none;
+    }
+}
