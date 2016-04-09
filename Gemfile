@@ -41,6 +41,7 @@ gem 'bootstrap-material-design'
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'cocoon', '1.2.9'
+gem 'rambulance'
 
 # for making graph
 gem "lazy_high_charts"

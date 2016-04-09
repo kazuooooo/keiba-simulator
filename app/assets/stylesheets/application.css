@@ -145,3 +145,14 @@
         font-size: 12px !important;
     }
 }
+
+.error-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.error-box p {
+    text-align: center;
+}
