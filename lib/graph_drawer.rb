@@ -54,7 +54,7 @@ module GraphDrawer
       f.title(text: '結果')
       f.xAxis(categories: xAxis_categories)
       f.options[:yAxis] = [{ title: { text: '円' } }, { title: { text: 'レース数' }, opposite: true }]
-      f.series(name: 'お金', data: money_data, type: 'column', yAxis: 0)
+      f.series(name: 'お金', data: money_data, type: 'column')
       f.series(name: '勝利レース数', data: win_count_data, type: 'column', yAxis: 1)
       f.series(name: '合計レース数', data: race_count_data, type: 'column', yAxis: 1)
     end

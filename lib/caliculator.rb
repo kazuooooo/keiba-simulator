@@ -29,13 +29,13 @@ module Caliculator
 
   # 検索条件に合うhorce_resultを取得
   def get_target_horce_results(date_from, date_to, place, popularity)
-    result = Horceresult.includes(:race).where(horceresults: {popularity: popularity},
+    result = Horceresult.includes(:race, :horce).where(horceresults: {popularity: popularity},
                                             races: {date: date_from..date_to,
                                                     place_id: Place.find_by(name: place)})
   end
   # 条件に合う
   def get_target_horce_results_v2(date_from, date_to, place, popcon)
-    result = Horceresult.includes(:race).where(horceresults: {popularity: popcon.popularity,
+    result = Horceresult.includes(:race, :horce).where(horceresults: {popularity: popcon.popularity,
                                                            odds: (popcon.odds_start)..(popcon.odds_end)},
                                             races: {date: date_from..date_to})
   end
