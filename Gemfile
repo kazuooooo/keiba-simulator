@@ -43,6 +43,7 @@ gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'cocoon', '1.2.9'
 gem 'rambulance'
 gem 'google-analytics-rails'
+gem 'bullet'
 
 # for making graph
 gem "lazy_high_charts"
@@ -50,7 +51,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rails-erd'
-  gem 'bullet'
 end
 
 group :development do

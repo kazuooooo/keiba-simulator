@@ -1,5 +1,4 @@
 set :stage, :production
-
 role :app, %w{ubuntu@52.193.91.187}
 role :web, %w{ubuntu@52.193.91.187}
 role :db,  %w{ubuntu@52.193.91.187}
