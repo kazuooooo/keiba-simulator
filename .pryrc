@@ -31,3 +31,4 @@ if defined? Hirb
 
   Hirb.enable
 end
+AwesomePrint.pry!

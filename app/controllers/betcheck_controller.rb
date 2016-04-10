@@ -26,7 +26,7 @@ class BetcheckController < ApplicationController
   end
 
   def has_race?(place)
-    @odds_data.has_key?(place)
+    @odds_data.has_key?(place) if @odds_data
   end
   helper_method :has_race?
 end

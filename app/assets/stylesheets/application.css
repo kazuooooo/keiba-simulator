@@ -17,21 +17,24 @@
  */
 [class^="result_popularity"],
 [class*=" result_popularity"] {
-  display: inline-block;
+    display: inline-block;
 }
+
 [class^="result_border_start"],
 [class*=" result_border_start"] {
-  display: inline-block;
+    display: inline-block;
 }
+
 [class^="result_border_end"],
 [class*=" result_border_end"] {
-  display: inline-block;
+    display: inline-block;
 }
 
 .pricing-table {
     display: inline-block;
 }
-.pricing-table ul{
+
+.pricing-table ul {
     border-width: 1px;
     border-style: solid;
     border-color: #CCCCCC;
@@ -45,11 +48,13 @@
     padding: 5px;
     background-color: #FFFFFF;
 }
-.pricing-table ul:hover{
+
+.pricing-table ul:hover {
     transform: scale(1.1);
-    box-shadow: 3px 5px 7px rgba(0,0,0,.7);
+    box-shadow: 3px 5px 7px rgba(0, 0, 0, .7);
 }
-.pricing-table ul li{
+
+.pricing-table ul li {
     padding: 5px;
     background-color: #EFEFEF;
     border-width: 2px;
@@ -58,22 +63,27 @@
     border-bottom-width: 2px;
     font-size: 14px;
 }
-.pricing-table li:nth-child(odd){
+
+.pricing-table li:nth-child(odd) {
     background-color: #F7F7F7;
 }
-.pricing-table ul .heading{
+
+.pricing-table ul .heading {
     color: #FFFFFF;
     background-color: #536b39;
     font-size: 17px;
 }
-.pricing-table ul .price{
+
+.pricing-table ul .price {
     font-size: 25px;
 }
-.pricing-table ul .action{
+
+.pricing-table ul .action {
     font-size: 14px;
     color: #2A6496;
 }
-.pricing-table .action a{
+
+.pricing-table .action a {
     border-color: #B83737;
     border-width: 0px;
     border-radius: 26px;
@@ -85,8 +95,64 @@
     border-style: solid;
     color: #FFFFFF;
 }
+
 .footer {
- position: fixed;
- bottom: 0px;
- right: 10px;
+    position: fixed;
+    bottom: 0px;
+    right: 10px;
+}
+
+.explain-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    line-height: 32px;
+    border-radius: 2px;
+    font-size: 0.9em;;
+    background-color: #4285f4;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.explain-text {
+    margin: 15px;
+    font-size: 16px;
+}
+
+.for-sp {
+    display: none;
+}
+
+@media all and (max-width: 500px) {
+    .for-pc {
+        display: none;
+    }
+}
+
+@media all and (max-width: 720px) {
+    .navbar .navbar-brand {
+        height: 30px !important;
+        padding: 8px 7px !important;
+        font-size: 15px;;
+    }
+}
+
+@media all and (max-width: 720px) {
+    .navbar .navbar-nav > li > a {
+        padding-top: 4px !important;
+        padding-bottom: 10px !important;
+        font-size: 12px !important;
+    }
+}
+
+.error-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.error-box p {
+    text-align: center;
 }

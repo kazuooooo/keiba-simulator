@@ -62,7 +62,6 @@ html lang="en"
     .container
       .row
         .col-lg-12
-          = bootstrap_flash
           = yield
         // .col-lg-3
           // .well.sidebar-nav
@@ -76,4 +75,3 @@ html lang="en"
         /! /span
       /! /row
     /! /container
-  = analytics_init if Rails.env.production?
