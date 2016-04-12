@@ -1,11 +1,14 @@
-.form-group.nested-fields
+.form-group.nested-fields.pop-condition-container
   .popularity
-    = f.label "人気順", :class => "label label-default odds-label"
     = f.number_field :popularity, min: 0
+    = f.label "番人気", class: "pop-field-label"
   .odds_start
-    = f.label "下限オッズ", :class => "label label-default odds-label"
     = f.number_field :odds_start, min: 0
+    = f.label "倍〜", class: "pop-field-label"
+  .for-sp
+    = link_to_remove_association "削除", f, :class => "btn btn-danger"
   .odds_end
-    = f.label "上限オッズ", :class => "label label-default odds-label"
     = f.number_field :odds_end, min: 0
+    = f.label "倍まで", class: "pop-field-label"
+  .delete-button.for-pc
     = link_to_remove_association "削除", f, :class => "btn btn-danger"

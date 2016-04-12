@@ -22,6 +22,31 @@
   justify-content: space-between;
 }
 
+.pop-condition-container {
+  display: flex;
+  .popularity {
+
+  }
+  .odds-start {
+
+  }
+  .odds-end {
+
+  }
+  label {
+    margin: 0 8px 0 8px;
+  }
+  .delete-button {
+    a {
+      vertical-align: sub;
+    }
+  }
+}
+.pop-field-label {
+  margin: 0 8px 0 8px;
+}
+
+
 .place {
   width: 200px;
   height: 80px;
@@ -62,6 +87,31 @@
   .date-end {
     width: 100%;;
     height: 80px;
+  }
+
+  .pop-condition-container {
+    align-items: center;
+    flex-wrap: wrap;
+    .popularity {
+      width: 210px;
+    }
+    .odds-start {
+      width: 210px;
+    }
+    .odds-end {
+      width: 210px;
+    }
+    label {
+      margin: 0 3px 0 3px;
+      width: 50px;
+    }
+    .delete-button {
+      width: 260px;
+    }
+  }
+
+  .for-sp {
+    display: block !important;
   }
 }
 
