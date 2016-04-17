@@ -18,5 +18,5 @@
     = f.simple_fields_for :popconditions do |popcondition|
       = render 'popcondition_fields', f: popcondition
     = link_to_add_association "条件を追加する", f, :popconditions,  :class => "btn btn-primary"
-    = f.submit "検証する", class: "btn btn-info", data: { disable_with: "計算中..." }
+    = f.submit "計算する", class: "btn btn-info", data: { disable_with: "計算中..." }
     p ※ データ量によって計算に時間がかかる場合があります。気長にお待ち下さい。

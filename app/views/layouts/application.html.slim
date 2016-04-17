@@ -1,5 +1,5 @@
 doctype html
-html lang="en"
+html lang="ja"
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     meta charset="utf-8" /
@@ -39,7 +39,7 @@ html lang="en"
         .navbar-collapse.collapse.navbar-responsive-collapse
           ul.nav.navbar-nav
             li = link_to "分析", new_betcondition_path(:mode => "analyze")
-            li = link_to "検証", new_betcondition_path(:mode => "try")
+            li = link_to "シュミレーション", new_betcondition_path(:mode => "try")
             li = link_to "オッズチェック", betcheck_path
             li = mail_to 'keibasimulator@gmail.com', 'お問い合わせ'
           // ul.nav.navbar-nav.navbar-right

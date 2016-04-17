@@ -3,8 +3,14 @@
 - case @mode
 - when "try"
   .explain-container
-    h3.explain-text 検証モードは指定した条件で馬券を購入し、その条件で購入すれば過去のレースにおいて勝てるのか検証できます。(現在利用できるデータは2013年から2015年までです)
+    h3.explain-text
+      | シュミレーションモードは指定した条件にあてはまる馬券を全て購入して合算した結果がどうなるのかシュミレーションできます。
+      br
+      |(現在利用できるデータは2013年から2015年)
 - when "analyze"
   .explain-container
-    h3.explain-text 分析モードは指定したオッズの範囲を0.1ずつ全て購入し、どのオッズが勝ちやすいかを分析できます。(現在利用できるデータは2013年から2015年までです)
+    h3.explain-text
+      | 分析モードは指定した条件の範囲内で馬券を購入しオッズごとの結果を表示します。どのあたりが勝てるのかなんとなくわかります。
+      br
+      |(現在利用できるデータは2013年から2015年)
 = render partial: "shared/betcondition_form", locals: { bet_condition: @bet_condition, mode: @mode }
