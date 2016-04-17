@@ -5,9 +5,9 @@ namespace :csv_data do
   desc "import csv data to DB"
   #tmp task :import, 'file_name'
   task :import => :environment do |task, args|
-    clear_data()
+    # clear_data()
     # create_place_table()
-    for num in [2013] do
+    for num in [2015] do
       import_csv_data(num.to_s)
     end
   end
