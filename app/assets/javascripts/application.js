@@ -20,3 +20,4 @@
 //= require bootstrap-select
 //= require bootstrap-datepicker
 //= require bootstrap-material-design
+//= require social-share-button

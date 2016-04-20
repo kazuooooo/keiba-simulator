@@ -44,6 +44,7 @@ gem 'cocoon', '1.2.9'
 gem 'rambulance'
 gem 'google-analytics-rails'
 gem 'bullet'
+gem 'social-share-button'
 
 # for making graph
 gem "lazy_high_charts"
