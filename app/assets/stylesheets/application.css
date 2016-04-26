@@ -14,6 +14,7 @@
  *= require_self
  *= require bootstrap-datepicker3
  *= require bootstrap-material-design
+ *= require social-share-button
  */
 [class^="result_popularity"],
 [class*=" result_popularity"] {
