@@ -1,0 +1,36 @@
+meta charset='UTF-8'
+
+-# デスクリプションを不用意に変更されないようにする
+meta content='NOYDIR' name='ROBOTS'
+meta content='NOODP' name='ROBOTS'
+
+-# Twitter用のTwitter Cart対策
+meta content='summary' name='twitter:card'
+meta content='@twitter_user_name' name='twitter:site'
+
+-# モバイルに対応している場合のみ書く
+link media='handheld' rel='alternate' href="#{canonical_url}"
+
+-# RSSを作成している場合のみ書く
+-#link#gallery href='RSS-URL' rel='alternate' title='' type='application/rss+xml'
+
+- set_meta_tags site: page_title
+- set_meta_tags description: page_description
+- set_meta_tags keywords: page_keywords
+- set_meta_tags canonical: canonical_url
+
+ruby:
+  opg = {
+          title: page_title,
+          type: 'website',
+          url: canonical_url,
+          image: page_og_image,
+          site_name: Settings.site.title,
+          description: page_description,
+          locale: 'ja_JP' # 英語版を作る場合は要変更
+  }
+
+- set_meta_tags :open_graph => opg
+= Settings.reload!
+= display_meta_tags
+meta content="#{Settings.facebook.app_id}" property='fb:app_id'

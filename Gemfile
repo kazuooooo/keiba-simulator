@@ -48,6 +48,8 @@ gem 'social-share-button'
 # SEO
 gem 'meta-tags'
 gem 'sitemap_generator'
+# settings
+gem 'settingslogic'
 
 
 # for making graph

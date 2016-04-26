@@ -1,0 +1,11 @@
+ja:
+  meta:
+    title:
+      home:
+        index: "index title"
+    description:
+      home:
+        index: "index description"
+    keywords:
+      home:
+        index: "index keywords"

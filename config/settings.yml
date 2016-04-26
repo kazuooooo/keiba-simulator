@@ -1,0 +1,52 @@
+#defaults: &defaults
+#  foo:
+#    bar: "bar"
+#    hoge:
+#      val: "val"
+#      b_c: "b_c"
+#  a:
+#    b:
+#      c: "yeah!!"
+# 動く
+defaults: &defaults
+  site:
+    title: "Site Title"
+    url: "hoge"
+    meta:
+      description: "sample page description"
+      keywords: ["sample", "page", "keyword"]
+      og:
+        foo: "foo"
+        app_id: "app id"
+        image: "og_image_path"
+        type: "website"
+  facebook:
+    app_id: "hoge"
+# 動かない
+#defaults: &defaults
+#  site:
+#    title: "Site Title"
+#    url: "hoge"
+#    meta:
+#      description: "sample page description"
+#      keywords: ["sample", "page", "keyword"]
+#      og:
+#        foo: "foo"
+#        app_id: "app id"
+#        image: "og_image_path"
+#        type: "website"
+#  facebook:
+#    app:
+#      id: "hoge"
+# なぜか
+# Missing setting 'app_id' in 'og' section in 'meta' section in 'site' section in /Users/matsumotokazuya/Desktop/keiba-simulator/config/settings.yml
+# こうなる
+# 多分バグ
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
