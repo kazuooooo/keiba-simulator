@@ -36,6 +36,10 @@ class Race < ActiveRecord::Base
         .having('horce_count = ?', count)
   }
 
+  scope :sort_by_date, ->(from, to){
+      where(date: from..to)
+  }
+
   def sort_by_horce_result(key)
     self.horceresults.sort_by { |horceresult| horceresult[key] }
   end
