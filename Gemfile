@@ -45,6 +45,12 @@ gem 'rambulance'
 gem 'google-analytics-rails'
 gem 'bullet'
 gem 'social-share-button'
+# SEO
+gem 'meta-tags'
+gem 'sitemap_generator'
+# settings
+gem 'settingslogic'
+
 
 # for making graph
 gem "lazy_high_charts"

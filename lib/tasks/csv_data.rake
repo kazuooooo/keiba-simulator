@@ -7,7 +7,7 @@ namespace :csv_data do
   task :import => :environment do |task, args|
     # clear_data()
     # create_place_table()
-    for num in [2015] do
+    for num in [2016] do
       import_csv_data(num.to_s)
     end
   end
@@ -60,7 +60,15 @@ def import_csv_data(file_name)
     date_obj = Date.strptime(date_str,"%Y年 %m月 %d日")
     ### raceモデルを作成
     if (prior_row.nil?) || (row['R'] != prior_row['R'])
-      race = place.races.build(:date => date_obj, :race_num => row['R'], :race_name => row['レース名'])
+      race = place.races.build(date: date_obj,
+                               race_num: row['R'],
+                               race_name: row['レース名'],
+                               course: row['コース'],
+                               rotation: row['周り'],
+                               distance: row['距離'],
+                               weather: row['天候'],
+                               course_condition: row['馬場']
+      )
       place.save
     end
 
