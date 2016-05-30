@@ -58,6 +58,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rails-erd'
+  gem 'guard'
 end
 
 group :development do
@@ -85,5 +86,6 @@ group :development do
   gem 'capistrano-ext'
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
+  gem 'webmock'
 end
 
