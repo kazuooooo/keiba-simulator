@@ -11,7 +11,7 @@ class BetcheckController < ApplicationController
 
   private
   def set_odds_data
-    @odds_data      = BetCheckScraper.scrape_odds_data
+    @odds_data      = DataScraper.scrape_odds_data(Date.today.month, Date.today.day)
   end
 
   def set_bet_conditions

@@ -12,14 +12,14 @@
           th 単勝オッズ
           th 複勝オッズMin
           th 複勝オッズMax
-        - ordered_horces = race.horce_objs.sort_by{|horce| horce.tansyo}
+        - ordered_horces = race.horce_objs.sort_by{|horce| horce.odds}
       tbody
         - ordered_horces.each.with_index(1) do |horce, idx|
           tr
-            - if @bet_condition.meet_condition?(idx, horce.tansyo)
+            - if @bet_condition.meet_condition?(idx, horce.odds)
               td = (idx).to_s
               td = horce.horce_num
               td = horce.horce_name
-              td = horce.tansyo
+              td = horce.odds
               td = horce.fukusyo_min
               td = horce.fukusyo_max
