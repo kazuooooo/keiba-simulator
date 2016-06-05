@@ -87,5 +87,6 @@ group :development do
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
   gem 'webmock'
+  gem 'narray'
 end
 

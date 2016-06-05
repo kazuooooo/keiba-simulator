@@ -223,6 +223,7 @@ GEM
     multi_json (1.11.2)
     multipart-post (2.0.0)
     mysql2 (0.4.2)
+    narray (0.6.1.2)
     nenv (0.2.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
@@ -449,6 +450,7 @@ DEPENDENCIES
   mechanize
   meta-tags
   mysql2
+  narray
   pry
   pry-byebug
   pry-doc

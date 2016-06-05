@@ -24,10 +24,13 @@ namespace :machine_learning do
 
   desc "get todays race data from JRA web site"
   task :output_today_data, ['month', 'date'] => :environment do |task, args|
-    scraped_data = DataScraper.scrape_machine_learning_data(args[:month].to_i, args[:date].to_i)
+    month = args[:month].presence || Date.today.month
+    date  = args[:day].presence || Date.today.day
+    scraped_data = DataScraper.scrape_machine_learning_data(month.to_i, date.to_i)
     row_data = create_row_data_for_webscrape(scraped_data)
     output_csv_data(row_data)
   end
+
 end
 
 def create_row_data(date_from: nil, date_to: nil, players: nil)
@@ -56,7 +59,7 @@ def create_row_data_for_webscrape(scraped_data)
   rows = []
   scraped_data.each do |place, races|
     races.each do |race|
-      next if race.horce_objs.size < 16 #16頭以上立てのみ
+      next if race.horce_objs.size != 16 #16頭立てのみ
       row = Row.new()
       row.race = race
       row.distance = race.distance.match(/\d{4}/).to_s
@@ -72,7 +75,7 @@ def create_row_data_for_webscrape(scraped_data)
 end
 
 def output_csv_data(rows)
-  CSV.open("machine_learning_data#{Time.now.strftime("%Y%m%-d-%I:%M")}", "a") do |csv|
+  CSV.open("#{Rails.root}/predict_python/machine_learning_data#{Time.now.strftime("%Y%m%-d-%I:%M")}", "a") do |csv|
     rows.each do |row|
         csv << [
           row.race.try(:id) || Place.find_by(name: row.race.title.match(/回../).to_s.delete("回)")).id,
