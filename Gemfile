@@ -50,6 +50,8 @@ gem 'meta-tags'
 gem 'sitemap_generator'
 # settings
 gem 'settingslogic'
+# upsert
+gem 'upsert'
 
 
 # for making graph

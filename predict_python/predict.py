@@ -27,9 +27,7 @@ base = os.path.dirname(os.path.abspath(__file__))
 theta1 = np.loadtxt(os.path.normpath(os.path.join(base, './data/theta1.csv')), delimiter=',')
 theta2 = np.loadtxt(os.path.normpath(os.path.join(base, './data/theta2.csv')), delimiter=',')
 ## load X
-data = np.loadtxt(os.path.normpath(os.path.join(base, './data/machine_learning_data')), delimiter=',')
-
-# odds = np.loadtxt(os.path.normpath(os.path.join(base, './data/sample_odds.csv')), delimiter=',')
+data = np.loadtxt(os.path.normpath(os.path.join(base, './data/machine_learning_data2016065-03:34')), delimiter=',')
 
 X_race_info = data[:, 0:2]
 X_odds = data[:, 2:18];

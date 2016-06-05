@@ -1,6 +1,6 @@
 require 'mechanize'
 
-# 最新のオッズ情報を取得して返す
+# 必要なデータをWebサイトからスクレイピングする
 module DataScraper
   include Util
   class Scraped
@@ -11,7 +11,7 @@ module DataScraper
     end
   end
   class ScrapedRace < Scraped
-    attr_accessor :title, :race_num, :start_time, :distance, :course, :rotation, :horce_objs
+    attr_accessor :title, :race_num, :start_time, :distance, :course, :rotation, :horce_objs, :race_name
     def to_h
       hash = {}
       instance_variables.each do |val|
@@ -140,11 +140,13 @@ module DataScraper
     distance         = body.css(".raceData td")[1].text.split("　")[0]
     course, rotation = body.css(".raceData td")[1].text.split("　")[1].split("・")
     start_time       = body.css(".raceData td").last.text.match(/\d{2}:\d{2}/).to_s
+    race_name = body.css(".raceData td").first.text
     race_obj  = DataScraper::ScrapedRace.new({
         distance: distance,
         course: course,
         rotation: rotation,
-        start_time: start_time
+        start_time: start_time,
+        race_name: race_name
                                              })
   end
 

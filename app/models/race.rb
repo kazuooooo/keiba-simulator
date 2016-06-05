@@ -57,4 +57,8 @@ class Race < ActiveRecord::Base
     end
   end
 
+  def self.convert_numeral_value_to_string
+
+  end
+
 end
