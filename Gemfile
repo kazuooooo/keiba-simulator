@@ -52,6 +52,8 @@ gem 'sitemap_generator'
 gem 'settingslogic'
 # upsert
 gem 'upsert'
+# for cron job
+gem 'whenever', :require => false
 
 
 # for making graph

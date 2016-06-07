@@ -100,7 +100,7 @@ class DataMaker
             row.sort_by_odds[15].horce_num,
             # win_horce_popularity
             # 出てない馬が人気順0番になってしまっているので修正が必要
-            row.try(:sort_by_ranking) || 0,
+            row.try(:sort_by_ranking).first.popularity || 0,
         ]
       end
     end
